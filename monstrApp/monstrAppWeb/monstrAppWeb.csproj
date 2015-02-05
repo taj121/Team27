@@ -71,7 +71,11 @@
     <Content Include="App\Home\Home.css" />
     <Content Include="App\Home\Home.html" />
     <Content Include="App\Home\Home.js" />
-    <Content Include="App\Home\HtmlPage1.html" />
+    <Content Include="App\Home\OpenMenu.html">
+      <BrowseToURL>~/App/Home/OpenMenu.html</BrowseToURL>
+    </Content>
+    <Content Include="App\Home\NewSearchMenu.html" />
+    <Content Include="App\Home\SavedSearchMenu.html" />
     <Content Include="Content\Office.css" />
     <Content Include="Images\Close.png" />
     <Content Include="packages.config" />
@@ -302,6 +306,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App\App_LocalResources\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
