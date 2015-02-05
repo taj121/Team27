@@ -1,5 +1,6 @@
 ﻿/// <reference path="../App.js" />
 //nigel fdgsfg
+//danny v
 
 (function () {
     "use strict";
@@ -7,7 +8,7 @@
     // The initialize function must be run each time a new page is loaded
     Office.initialize = function (reason) {
         $(document).ready(function () 
-            app.initialize();
+           { app.initialize();
 
             $('#get--selected-data').click(getDataFromSelection);
         });
@@ -15,6 +16,16 @@
 
     function getText() {
         return $('#get').val();
+    }
+
+    /*
+    Function that will return a specific row of an array.
+    rowNum = the number of the row you wish to reutrn 
+    result = the array you wish to return the row from
+    ~Thea
+    */
+    function returnRow(rowNum, result) {
+        return result.value[rowNum];
     }
 
     /*
