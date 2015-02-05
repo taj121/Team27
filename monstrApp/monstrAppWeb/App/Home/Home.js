@@ -10,7 +10,8 @@
         $(document).ready(function () 
            { app.initialize();
 
-            $('#get--selected-data').click(getDataFromSelection);
+           $('#get--selected-data').click(getDataFromSelection);
+           $('#get-range-selection').click(selectRange);
         });
     };
 
@@ -52,6 +53,21 @@
         else {
             app.showNotification('The data item ' + toFind + '  is not in the Data', '');
         }
+    }
+
+    // Function to specify a range, needs to be modified
+    function selectRange() {
+        Office.context.document.bindings.addFromPromptAsync(Office.BindingType.Matrix,
+            { id: "MatrixBinding" },
+            function (asyncResult) {
+                if (Office.AsyncResultStatus.Succeeded) {
+                    app.showNotification("Added range: " + asyncResult.value.type
+                        + " and id: " + asyncResult.value.id);
+                } else {
+                    app.showNotification('Error:', asyncResult.error.message);
+                }
+            }
+        );
     }
 
 
