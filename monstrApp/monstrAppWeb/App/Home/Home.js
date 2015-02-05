@@ -19,6 +19,16 @@
     }
 
     /*
+    Function that will return a specific row of an array.
+    rowNum = the number of the row you wish to reutrn 
+    result = the array you wish to return the row from
+    ~Thea
+    */
+    function returnRow(rowNum, result) {
+        return result.value[rowNum];
+    }
+
+    /*
     Function that will find a string in an array (selection of cells passed in) and will print the index's 
     that it appears at. 
     Could be altered easily to return array of index's (at the moment in string form) that could be used to reference 
