@@ -4,8 +4,10 @@
 
 (function () {
     "use strict";
-
+    
     // The initialize function must be run each time a new page is loaded
+    //Dan note: This is causing an error for me all of a sudden..
+    //only happens on some program executions.. not sure if this is happening for others...
     Office.initialize = function (reason) {
         $(document).ready(function () 
            { app.initialize();
