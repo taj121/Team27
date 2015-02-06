@@ -71,11 +71,13 @@
     <Content Include="App\Home\Home.css" />
     <Content Include="App\Home\Home.html" />
     <Content Include="App\Home\Home.js" />
+    <Content Include="App\Home\InputHelpMenu.html" />
+    <Content Include="App\Home\NewSearchHelp.html" />
+    <Content Include="App\Home\NewSearchInput.html" />
     <Content Include="App\Home\OpenMenu.html">
       <BrowseToURL>~/App/Home/OpenMenu.html</BrowseToURL>
     </Content>
     <Content Include="App\Home\NewSearchMenu.html" />
-    <Content Include="App\Home\SavedSearchMenu.html" />
     <Content Include="Content\Office.css" />
     <Content Include="Images\Close.png" />
     <Content Include="packages.config" />
