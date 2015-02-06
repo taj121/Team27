@@ -1,10 +1,9 @@
-﻿<!--Linked from NewSearchMenu.html-->
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <title></title>
+    <title>Input Range of Numbers</title>
     <script src="../../Scripts/jquery-1.9.1.js" type="text/javascript"></script>
 
     <link href="../../Content/Office.css" rel="stylesheet" type="text/css" />
@@ -23,27 +22,23 @@
 <body>
     <div id="content-header">
         <div class="padding">
-            <h1>What would you like to search for?</h1>
+            <h2>Input Range of Numbers</h2>
         </div>
     </div>
     <div id="content-main">
         <div style="text-align:center;">
-            <form>
-                <!--I am hoping that we can parse the data based on what the user had told us on the previous page.
-                    Another option is to include this input box on the previous page as to alleviate confustion.
-                    Again, we can talk about this at the next mtg-->
-                Input Search Terms<br>
-                <p>Please separate a number range with a dash (e.g 1-5 signals the range 1 through 5)</p>
-                <p>Please separate multiple words with commas (e.g. apple,berry,banana signals a search
-                of either apple, berry, or banana)</p>
-                <input type="text" name="search-input">
-            </form>
+            <p>Please input the beginning and end of the range you would like to add:</p>
+            <input type="number" name="Range-Begin" width="10" /> - <input type="number" name="Range-End" width="10" />
             <br />
-            <form action="NewSearchMenu.html">
-                <input type="submit" value="Back">
+            <form action="NewSearchEndMenu.html">
+                <input type="submit" value="OK" />
             </form>
-            <form action="InputHelpMenu.html">
-                <input type="submit" value="Help">
+            <br/>
+            <form action="SelectSearchRange.html">
+                <input type="submit" value="Back" />
+            </form>
+            <form action="Help_RangeNumberInput.html">
+                <input type="submit" value="Help" />
             </form>
         </div>
     </div>

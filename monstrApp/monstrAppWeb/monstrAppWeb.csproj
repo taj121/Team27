@@ -72,12 +72,15 @@
     <Content Include="App\Home\Home.html" />
     <Content Include="App\Home\Home.js" />
     <Content Include="App\Home\InputHelpMenu.html" />
+    <Content Include="App\Home\Input_MultipleNumbers.html" />
+    <Content Include="App\Home\Input_RangeNumbers.html" />
+    <Content Include="App\Home\Input_SingleNumber.html" />
     <Content Include="App\Home\NewSearchHelp.html" />
-    <Content Include="App\Home\NewSearchInput.html" />
     <Content Include="App\Home\OpenMenu.html">
       <BrowseToURL>~/App/Home/OpenMenu.html</BrowseToURL>
     </Content>
-    <Content Include="App\Home\NewSearchMenu.html" />
+    <Content Include="App\Home\SelectSearchRange.html" />
+    <Content Include="App\Home\SelectSearchType.html" />
     <Content Include="Content\Office.css" />
     <Content Include="Images\Close.png" />
     <Content Include="packages.config" />

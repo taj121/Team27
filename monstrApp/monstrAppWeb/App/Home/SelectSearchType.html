@@ -25,36 +25,44 @@
     <body>
         <div id="content-header">
             <div class="padding">
-                <h1>New Search</h1>
+                <h2>Add Field</h2>
             </div>
         </div> 
-        <h2>What would you like to search for?</h2><br />
-        <div style="text-align:center">
-            <!--The buttons that allow the user to tell us what kind of input they are searching for-->
-            <!--Note: The way this is set up, I am envisioning that each button will correspond to a mutator
+        <div class="padding" style="text-align:center;">
+            <!--Note: Need to fix spacing. Don't know why the app is screwing that up-->
+            <p>What would you like to search for?</p><br />
+            
+                <!--The buttons that allow the user to tell us what kind of input they are searching for-->
+                <!--Note: The way this is set up, I am envisioning that each button will correspond to a mutator
                 of some "typeOfData" field in our javascript. However, another way to do this would be to 
                 link to an entirely different html page for each type. I'm OK doing either and I will bring
                 this up at our next mtg.-->
-            <ul style="text-align:center">
-                <li><button id="single-number">Single Number</button></li>
-                <li><button id="multiple-number">Multiple Numbers</button></li>
-                <li><button id="range-numbers">A Range of Numbers</button></li>
-                <li><button id="single-word">A Single Word</button></li>
-                <li><button id="multiple-words">Multiple Words</button></li>
-            </ul>
-            <br />
-            <form action="NewSearchInput.html">
-                <input type="submit" value="Select">
-            </form>
-            <br />
-            <form action="NewSearchHelp.html">
-                <input type="submit" value="Help">
-            </form>
-            <form action="OpenMenu.html">
-                <input type="submit" value="Back">
-            </form>
+            
+                <form action="Input_SingleNumber.html">
+                    <input type="submit" value="Single Number">
+                </form>
+                <form action="Input_MultipleNumbers.html">
+                    <input type="submit" value="Multiple Numbers">
+                </form>
+                <form action="Input_RangeNumbers.html">
+                    <input type="submit" value="Range of Numbers" />
+                </form>
+                <form action="Input_SingleWord.html">
+                    <input type="submit" value="Single Word" /> 
+                </form>
+                <form action="Input_MultipleWords.html">
+                    <input type="submit" value="Multiple Words" />
+                </form>
+   
+                <br />
+                <form action="Help_SelectSearchType.html">
+                    <input type="submit" value="Help">
+                </form>
+                <form action="SelectSearchType.html">
+                    <input type="submit" value="Back">
+                </form>
+            </div>
         </div>
-        
         
     </body>
 </html>
