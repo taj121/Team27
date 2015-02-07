@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <title>New Search Help Menu</title>
+    <title>Input Multiple Numbers</title>
     <script src="../../Scripts/jquery-1.9.1.js" type="text/javascript"></script>
 
     <link href="../../Content/Office.css" rel="stylesheet" type="text/css" />
@@ -22,16 +22,25 @@
 <body>
     <div id="content-header">
         <div class="padding">
-            <h1>Input Help Menu</h1>
+            <h2>Input Multiple Numbers</h2>
         </div>
     </div>
     <div id="content-main">
-        <div class="padding">
-            <h3>Very useful help menu telling the user how to input search terms correctly</h3>
-        </div>
-        <div style="text-align:center">
-            <form action="NewSearchInput.html">
-                <input type="submit" value="Back">
+        <div style="text-align:center;">
+            <p>Please input the numbers you wish to look for, separated by commas:<br />
+            (E.g. 1,7,30 means I am looking for the numbers 1, 7, and 30)
+            </p>
+            <input type="text" name="Multiple-Number-Input" />
+            <br />
+            <form action="NewSearchEndMenu.html">
+                <input type="submit" value="OK" />
+            </form>
+            <br />
+            <form action="SelectSearchRange.html">
+                <input type="submit" value="Back" />
+            </form>
+            <form action="Help_MultipleNumberInput.html">
+                <input type="submit" value="Help" />
             </form>
         </div>
     </div>

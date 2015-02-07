@@ -71,16 +71,15 @@
     <Content Include="App\Home\Home.css" />
     <Content Include="App\Home\Home.html" />
     <Content Include="App\Home\Home.js" />
-    <Content Include="App\Home\InputHelpMenu.html" />
-    <Content Include="App\Home\Input_MultipleNumbers.html" />
-    <Content Include="App\Home\Input_RangeNumbers.html" />
-    <Content Include="App\Home\Input_SingleNumber.html" />
+    <Content Include="App\New_Search\Input_Menus\Input_MultipleNumbers.html" />
+    <Content Include="App\New_Search\Input_Menus\Input_RangeNumbers.html" />
+    <Content Include="App\New_Search\Input_Menus\Input_SingleNumber.html" />
     <Content Include="App\Home\NewSearchHelp.html" />
     <Content Include="App\Home\OpenMenu.html">
       <BrowseToURL>~/App/Home/OpenMenu.html</BrowseToURL>
     </Content>
-    <Content Include="App\Home\SelectSearchRange.html" />
-    <Content Include="App\Home\SelectSearchType.html" />
+    <Content Include="App\New_Search\Range_Type_Specification\SelectSearchRange.html" />
+    <Content Include="App\New_Search\Range_Type_Specification\SelectSearchType.html" />
     <Content Include="Content\Office.css" />
     <Content Include="Images\Close.png" />
     <Content Include="packages.config" />
@@ -314,6 +313,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\App_LocalResources\" />
+    <Folder Include="App\New_Search\Input_Menus\Input_Help_Pages\" />
+    <Folder Include="App\New_Search\Range_Type_Specification\Specification_Help_Pages\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
