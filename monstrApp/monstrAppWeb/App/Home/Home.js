@@ -32,6 +32,23 @@
     }
 
     /*
+    Function that will return a set rows of an array.
+    Return type is an array of rows
+    rowNums = the numbers of the rows you wish to reutrn 
+    result = the array you wish to return the row from
+    ~Thea
+    */
+    function returnRows(rowNums, result) {
+        var rows = [];
+        for (var i = 0; i < rowNums.length; i++) {
+            rows[i] = returnRow[i];
+        }
+        return rows;
+    }
+
+
+
+    /*
     Function that will find a string in an array (selection of cells passed in) and will print the index's 
     that it appears at. 
     Could be altered easily to return array of index's (at the moment in string form) that could be used to reference 
