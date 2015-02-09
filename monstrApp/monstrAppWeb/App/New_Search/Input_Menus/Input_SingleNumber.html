@@ -1,43 +1,44 @@
-﻿<!DOCTYPE html>
+﻿<!--Dan 2.9.14-->
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <title>Input Range of Numbers</title>
-    <script src="../../Scripts/jquery-1.9.1.js" type="text/javascript"></script>
+    <title>Input Single Number</title>
+    <script src="/Scripts/jquery-1.9.1.js" type="text/javascript"></script>
 
-    <link href="../../Content/Office.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/Office.css" rel="stylesheet" type="text/css" />
     <script src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js" type="text/javascript"></script>
 
     <!-- To enable offline debugging using a local reference to Office.js, use:                        -->
     <!-- <script src="../../Scripts/Office/MicrosoftAjax.js" type="text/javascript"></script>  -->
     <!-- <script src="../../Scripts/Office/1.1/office.js" type="text/javascript"></script>  -->
 
-    <link href="../App.css" rel="stylesheet" type="text/css" />
-    <script src="../App.js" type="text/javascript"></script>
+    <link href="/App/App.css" rel="stylesheet" type="text/css" />
+    <script src="/App/App.js" type="text/javascript"></script>
 
-    <link href="Home.css" rel="stylesheet" type="text/css" />
-    <script src="Home.js" type="text/javascript"></script>
+    <link href="/App/Home/Home.css" rel="stylesheet" type="text/css" />
+    <script src="/App/Home/Home.js" type="text/javascript"></script>
 </head>
 <body>
     <div id="content-header">
         <div class="padding">
-            <h2>Input Range of Numbers</h2>
+            <h2>Input Single Number</h2>
         </div>
     </div>
     <div id="content-main">
         <div style="text-align:center;">
-            <p>Please input the beginning and end of the range you would like to add:</p>
-            <input type="number" name="Range-Begin" width="10" /> - <input type="number" name="Range-End" width="10" />
+            <p>Please input the number you wish to add to the search:</p>
+            <input type="number"  name="Single-Number-Input"/>
             <br />
             <form action="NewSearchEndMenu.html">
                 <input type="submit" value="OK" />
             </form>
-            <br/>
-            <form action="SelectSearchRange.html">
+            <br />
+            <form action="../Range_Type_Specification/SelectSearchType.html">
                 <input type="submit" value="Back" />
             </form>
-            <form action="Help_RangeNumberInput.html">
+            <form action="./Input_Help_Pages/Help_SingleNumberInput.html">
                 <input type="submit" value="Help" />
             </form>
         </div>

@@ -1,24 +1,25 @@
-﻿<!--2nd page of Monstr App linked from introductory home page-->
+﻿<!--Dan 2.9.14-->
+<!--2nd page of Monstr App linked from introductory home page-->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
         <title></title>
-        <script src="../../Scripts/jquery-1.9.1.js" type="text/javascript"></script>
+        <script src="/Scripts/jquery-1.9.1.js" type="text/javascript"></script>
 
-        <link href="../../Content/Office.css" rel="stylesheet" type="text/css" />
+        <link href="/Content/Office.css" rel="stylesheet" type="text/css" />
         <script src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js" type="text/javascript"></script>
 
         <!-- To enable offline debugging using a local reference to Office.js, use:                        -->
         <!-- <script src="../../Scripts/Office/MicrosoftAjax.js" type="text/javascript"></script>  -->
         <!-- <script src="../../Scripts/Office/1.1/office.js" type="text/javascript"></script>  -->
 
-        <link href="../App.css" rel="stylesheet" type="text/css" />
-        <script src="../App.js" type="text/javascript"></script>
+        <link href="/App/App.css" rel="stylesheet" type="text/css" />
+        <script src="/App/App.js" type="text/javascript"></script>
 
-        <link href="Home.css" rel="stylesheet" type="text/css" />
-        <script src="Home.js" type="text/javascript"></script>
+        <link href="/App/Home/Home.css" rel="stylesheet" type="text/css" />
+        <script src="/App/Home/Home.js" type="text/javascript"></script>
 </head>
 <body>
     <div id="content-header">
@@ -29,7 +30,7 @@
     <div id="content-main">
         <div class ="padding">
             <!--Takes user to new search menu-->
-            <form action="SelectSearchRange.html">
+            <form action="/App/New_Search/Range_Type_Specification/SelectSearchRange.html">
                 <input type="submit" value="New Search">
             </form>
             <!--Takes user to saved search menu-->
@@ -38,7 +39,7 @@
             </form>
             <!--Takes user to help menu (I am assuming we will create DIFFERENT help menus for each page
                 that cater specifically to what is on each page but I will bring this up at the next mtg)-->
-            <form action="OpenMenu.html">
+            <form action="NewSearchHelp.html">
                 <input type="submit" value="Tutorial">
             </form>
         </div>
