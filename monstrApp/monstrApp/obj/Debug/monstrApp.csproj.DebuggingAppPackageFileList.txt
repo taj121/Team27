@@ -1,0 +1,2 @@
+bin\Debug\OfficeAppManifests\monstrAppManifest.xml
+C:\Users\Nigel\Source\Repos\Team272\monstrApp\monstrApp\bin\Debug\monstrApp.debugapp

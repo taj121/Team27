@@ -21,6 +21,8 @@
         return $('#get').val();
     }
 
+
+
     /*
     Function that will return a specific row of an array.
     rowNum = the number of the row you wish to reutrn 
@@ -72,6 +74,32 @@
         else {
             app.showNotification('The data item ' + toFind + '  is not in the Data', '');
         }
+    }
+
+    /*
+    *     Function to write data from one excel sheet to another
+    *     The idea is to make the returned result from the search 
+    *     the "originalData" parameter, and then write this to the new excel sheet.. 
+    *     Needs frontend and testing.. nigel
+    */
+    function writeDataToNewSheet(targetRange, originalData) {
+        // Add binding
+        Office.context.document.bindings.addFromNamedItemAsync($(targetRange).val(), Office.BindingType.Matrix, { id: "exportedBinding" }, function (asyncResult) {
+            if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+                writeMessage("Error: " + asyncResult.error.message);
+            }
+            else {
+                // Write data in original to the binding in new 
+                Office.select("bindings#exportedBinding").setDataAsync(originalData, { coercionType: "matrix" }, function (asyncResult) {
+                    if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+                        app.showNotification("Error: " + asyncResult.error.message);
+                    }
+                    else {
+                        app.showNotification("Export data from original sheet to target sheet successfully");
+                    }
+                });
+            }
+        });
     }
 
     // Function to specify a range, needs to be modified
