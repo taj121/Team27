@@ -44,6 +44,7 @@
     <None Include="monstrAppManifest\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{aae0014f-d9a9-4b79-8c39-adc5511c139b}</SharePointProjectItemId>
     </None>
+    <Content Include="Documentation\Specs.txt" />
     <Content Include="monstrAppManifest\monstrApp.xml">
       <OpcRelationship>manifest-oemanifest</OpcRelationship>
     </Content>

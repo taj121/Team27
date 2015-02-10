@@ -27,15 +27,14 @@
             <h2>Add Field - Select Search Range</h2>
         </div>
     </div>
-    <div class="padding" style="text-align:center;">
-        <h2>Which column(s) would you like to search?</h2>
+    <div id="content-main" class="padding" style="text-align:center;">
+        <h2>Which column would you like to search?</h2>
         <p>
-            Please input letter names separated by a comma.
-            (E.g. A,B,C means) I would like to search columns A, B, and C
+            Please input column letter:
         </p>
         <!--Note: this is not how I intend on asking for range input at the end... This will change as we
             flesh out different ways to ask for the user to select cells-->
-        <input type="text" name="search-cols" />
+        <input type="text" id="search_col" />
         <br />
         <form action="SelectSearchType.html">
             <input type="submit" value="OK">

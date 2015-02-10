@@ -1,0 +1,37 @@
+﻿Created 2.9.15 by Dan
+
+New Search Specs (moving from start to finish through app flow)
+1) /App/New_Search/Range_Type_Specification/SelectSearchRange.html
+	- Takes in column of search field to be added
+	- id: search_col
+	- reqs: 
+		1) Accept letter input (capital and lower case) and highlight
+		corresponding column in Excel.
+		2) Accept user selection of column in Excel GUI and auto-fill text box
+		with user's selection. 
+		3) Map user's choice internally to the column in selected dataset 
+		to be searched.
+
+2) /App/New_Search/Input_Menus/Input_RangeNumbers.html
+	- Takes in range of numbers to be added to search field
+	- id: range_begin and range_end
+	- reqs: 
+		1) Generate an array that includes every number between range_begin and
+		range_end
+		2) Associate that array with the previously user selected column to be
+		searched
+
+3) /App/New_Search/Input_Menus/Input_SingleNumber.html
+   /App/New_Search/Input_Menus/Input_SingleWord.html
+	- Take in single number and single word to be added to search field
+	- id: single_input
+	- reqs: Associate entry with the previously user selected column to be
+	searched
+
+4) /App/New_Search/Input_Menus/Input_MultipleNumbers.html
+   /App/New_Search/Input_Menus/Input_MultipleWords.html
+	- Takes in multiple entries to be added to search
+	- id: multiple_input
+	- reqs: TBD
+
+
