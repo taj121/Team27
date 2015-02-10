@@ -80,6 +80,20 @@
     /*
     *   Function to convert letters to numbers, nigel
     */
+    //Nigel -- the user may accidentally enter in two or more letters
+    //that are not the same (e.g. "AB"). If this happens we must return an
+    //error and ask the user to input again. Dan
+    function checkLetters(inputLetters) {
+        var first_letter = inputLetters[0];
+        for (var i = 0; i < inputLetters.length; i++) {
+            if (inputLetters[i] != first_letter) {
+                //error message
+                return false;
+            }
+        }
+        return true;
+    }
+
     function convertLettersToNumbers(inputLetters)
     {
         var valueToReturn = 0;
@@ -87,9 +101,23 @@
         for(var i = 0, j = inputLetters.length-1; i < inputLetters.length; j--, i++)
         {
             valueToReturn += (alphabet.indexOf(inputLetters[i]) + 1) * Math.pow(alphabet.length, j);
+            //Nigel should it be multiplication instead of exponent?
+            //input "AAA" should return 53. The first iteration thru the loop with "AAA" as input
+            //adds (1)*(26^2) to valueToReturn
+            //Another way to do it is below. Dan
         }
         return valueToReturn;
     }
+
+    // Could be something like:
+    function convertLettersToNumbers(inputLetters) {
+        //Assuming we've already checked to make sure they are all the same
+        //letter
+        var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        var offset = 26 * (inputLetters.length-1);
+        return (offset + alphabet.indexOf(inputLetters[0] + 1));
+    }
+    
 
     /*
     *     Function to write data from one excel sheet to another
