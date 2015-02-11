@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <App xmlns="http://schemas.microsoft.com/sharepoint/2012/app/manifest"
      Name="monstrApp"
-     ProductID="{a33ef820-fb29-48fc-b907-f669d8b80a94}"
+     ProductID="{daa51982-c76b-4f30-aa1e-ed4c5fb8609d}"
      Version="1.0.0.0"
      SharePointMinVersion="15.0.0.0"
 >
