@@ -105,10 +105,12 @@
             //input "AAA" should return 53. The first iteration thru the loop with "AAA" as input
             //adds (1)*(26^2) to valueToReturn
             //Another way to do it is below. Dan
-            // hi, no 'BA' should return 53.. 'AAA' 702, as far as I can tell from the way 
-            // excel sheet anyways. As it increases 'A, B... Z, AA, AB,...AZ, BA, BB....
+            // hi, 'BA' should return 52 or? 'AAA' 702, as far as I can tell from the way 
+            // excel sheet works anyways. As it increases 'A, B... Z, AA, AB,...AZ, BA, BB...
+            // YA, ... ZA, AAA...
+            // Let me know if it makes sense. Nigel
         }
-        return valueToReturn;
+        return valueToReturn - 1;
     }
 
     // Could be something like:
