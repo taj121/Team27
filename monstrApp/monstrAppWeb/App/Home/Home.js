@@ -80,19 +80,6 @@
     /*
     *   Function to convert letters to numbers, nigel
     */
-    //Nigel -- the user may accidentally enter in two or more letters
-    //that are not the same (e.g. "AB"). If this happens we must return an
-    //error and ask the user to input again. Dan
-    function checkLetters(inputLetters) {
-        var first_letter = inputLetters[0];
-        for (var i = 0; i < inputLetters.length; i++) {
-            if (inputLetters[i] != first_letter) {
-                //error message
-                return false;
-            }
-        }
-        return true;
-    }
 
     function convertLettersToNumbers(inputLetters)
     {
@@ -101,26 +88,21 @@
         for(var i = 0, j = inputLetters.length-1; i < inputLetters.length; j--, i++)
         {
             valueToReturn += (alphabet.indexOf(inputLetters[i]) + 1) * Math.pow(alphabet.length, j);
-            //Nigel should it be multiplication instead of exponent?
-            //input "AAA" should return 53. The first iteration thru the loop with "AAA" as input
-            //adds (1)*(26^2) to valueToReturn
-            //Another way to do it is below. Dan
             // hi, 'BA' should return 52 or? 'AAA' 702, as far as I can tell from the way 
             // excel sheet works anyways. As it increases 'A, B... Z, AA, AB,...AZ, BA, BB...
             // YA, ... ZA, AAA...
             // Let me know if it makes sense. Nigel
+
+            //Nigel you are 100% right. Sorry I thought it went A..Z, AA..ZZ, AAA..ZZZ. Must have
+            //been using a different version of excel at some point in my life. Dan
+
+            //The last thing is does javascript differentiate lower and upper case? In java I'd
+            //use: valueToReturn += (alphabet.indexOf(inputLetters[i].toUpperCase()) + 1)... etc.
+            //just in case the user enters lower but idk about javascript.
         }
         return valueToReturn - 1;
     }
 
-    // Could be something like:
-    function convertLettersToNumbers(inputLetters) {
-        //Assuming we've already checked to make sure they are all the same
-        //letter
-        var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        var offset = 26 * (inputLetters.length-1);
-        return (offset + alphabet.indexOf(inputLetters[0] + 1));
-    }
     
 
     /*

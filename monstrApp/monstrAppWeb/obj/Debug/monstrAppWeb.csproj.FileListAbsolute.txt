@@ -4,3 +4,9 @@ C:\Users\Nigel\Source\Repos\Team272\monstrApp\monstrAppWeb\bin\monstrAppWeb.pdb
 C:\Users\Nigel\Source\Repos\Team272\monstrApp\monstrAppWeb\obj\Debug\monstrAppWeb.csprojResolveAssemblyReference.cache
 C:\Users\Nigel\Source\Repos\Team272\monstrApp\monstrAppWeb\obj\Debug\monstrAppWeb.dll
 C:\Users\Nigel\Source\Repos\Team272\monstrApp\monstrAppWeb\obj\Debug\monstrAppWeb.pdb
+C:\Users\Daniel Vogel\Source\Repos\Team27\monstrApp\monstrAppWeb\bin\monstrAppWeb.dll.config
+C:\Users\Daniel Vogel\Source\Repos\Team27\monstrApp\monstrAppWeb\bin\monstrAppWeb.dll
+C:\Users\Daniel Vogel\Source\Repos\Team27\monstrApp\monstrAppWeb\bin\monstrAppWeb.pdb
+C:\Users\Daniel Vogel\Source\Repos\Team27\monstrApp\monstrAppWeb\obj\Debug\monstrAppWeb.csprojResolveAssemblyReference.cache
+C:\Users\Daniel Vogel\Source\Repos\Team27\monstrApp\monstrAppWeb\obj\Debug\monstrAppWeb.dll
+C:\Users\Daniel Vogel\Source\Repos\Team27\monstrApp\monstrAppWeb\obj\Debug\monstrAppWeb.pdb
