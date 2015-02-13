@@ -2,6 +2,11 @@
 //nigel fdgsfg
 //danny v
 
+//global variable for user data selection, will be a 2D array ~Thea
+var userDataSelection;
+//stores the current search array of form column-dataToSearchFor column being index 0 of internal array ~Thea
+var currentSearch = [];
+
 (function () {
     "use strict";
     
@@ -11,17 +16,23 @@
     Office.initialize = function (reason) {
         $(document).ready(function () 
            { app.initialize();
-
-           $('#get--selected-data').click(getDataFromSelection);
-           $('#get-range-selection').click(selectRange);
+            //will get data from user selection on click of button with this id ~Thea
+            $('#get--selected-data').click(getDataFromSelection);
+            //will add a new column to search in, initially will have nothing to search for ~Thea
+            $('#get-new-column').click(addNewColumn);
+            //adds new values to the most resent column added to current search ~Thea
+            $('#add-search-param').click(addNewParam);
+            $('#get-range-selection').click(selectRange);
         });
     };
 
+    /*
+    gets text from input box with this id
+    ~Thea
+    */
     function getText() {
         return $('#get').val();
     }
-
-
 
     /*
     Function that will return a specific row of an array.
@@ -47,8 +58,6 @@
         }
         return rows;
     }
-
-
 
     /*
     Function that will find a string in an array (selection of cells passed in) and will print the index's 
@@ -76,11 +85,9 @@
         }
     }
 
-
     /*
     *   Function to convert letters to numbers, nigel
     */
-
     function convertLettersToNumbers(inputLetters)
     {
         var valueToReturn = 0;
@@ -102,8 +109,6 @@
         }
         return valueToReturn - 1;
     }
-
-    
 
     /*
     *     Function to write data from one excel sheet to another
@@ -145,21 +150,41 @@
             }
         );
     }
-
-
-    // Reads data from current document selection and displays a notification
+    
+    /*
+    Updates global variable to user selection when called
+    ~Thea
+    */
     function getDataFromSelection() {
         Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix,
             function (result) {
                 if (result.status === Office.AsyncResultStatus.Succeeded) {
-                    //get string value from user
-                    var toFind = getText();
-                    //check if it is in the selection
-                    findIndex(toFind, result);                    
+                    userDataSelection = result;
                 } else {
                     app.showNotification('Error:', result.error.message);
                 }
             }
         );
+    }
+
+    /*
+    Adds a new column to search in to the array of current search. 
+    Defaults with nothing to search for. 
+    ~Thea
+    */
+    function addNewColumn() {
+        var newColIndex = convertLettersToNumbers($('#get-col').val());
+        currentSearch.push([newColIndex]);
+    }
+
+    /*
+    Fucntion to add new search parameters to the most recent column added to the current search
+    ~Thea
+    */
+    function addNewParam() {
+        var column = currentSearch.pop();
+        var param = $('#get-param').val();
+        column.push(param);
+        currentSearch.push(column);
     }
 })();
