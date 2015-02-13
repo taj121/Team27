@@ -81,6 +81,7 @@
     <Content Include="App\New_Search\Input_Menus\Input_MultipleNumbers.html" />
     <Content Include="App\New_Search\Input_Menus\Input_RangeNumbers.html" />
     <Content Include="App\New_Search\Input_Menus\Input_SingleNumber.html" />
+    <Content Include="App\New_Search\NewSearch.js" />
     <Content Include="App\New_Search\NewSearchEndMenu.html" />
     <Content Include="App\New_Search\NewSearchHelp.html" />
     <Content Include="App\New_Search\OpenMenu.html">
