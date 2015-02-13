@@ -13,10 +13,6 @@
            { app.initialize();
             //will get data from user selection on click of button with this id ~Thea
             $('#get--selected-data').click(getDataFromSelection);
-            //will add a new column to search in, initially will have nothing to search for ~Thea
-            $('#get-new-column').click(addNewColumn);
-            //adds new values to the most resent column added to current search ~Thea
-            $('#add-search-param').click(addNewParam);
             $('#get-range-selection').click(selectRange);
         });
     };
