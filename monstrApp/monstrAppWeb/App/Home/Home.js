@@ -14,8 +14,19 @@
 
            $('#get--selected-data').click(getDataFromSelection);
            $('#get-range-selection').click(selectRange);
+           $('#add_data').click(test);
         });
     };
+
+    function test() {
+        app.showNotification("Added '" + $('#data_input').val() + "' to search");
+        var newLabel = document.createElement("label");
+        newLabel.innerHTML = $('#data_input').val();
+        document.body.appendChild(newLabel);
+
+        document.getElementById('data_input').value = "";
+        
+    }
 
     function getText() {
         return $('#get').val();
