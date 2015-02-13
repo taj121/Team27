@@ -10,3 +10,15 @@ C:\Users\Daniel Vogel\Source\Repos\Team27\monstrApp\monstrAppWeb\bin\monstrAppWe
 C:\Users\Daniel Vogel\Source\Repos\Team27\monstrApp\monstrAppWeb\obj\Debug\monstrAppWeb.csprojResolveAssemblyReference.cache
 C:\Users\Daniel Vogel\Source\Repos\Team27\monstrApp\monstrAppWeb\obj\Debug\monstrAppWeb.dll
 C:\Users\Daniel Vogel\Source\Repos\Team27\monstrApp\monstrAppWeb\obj\Debug\monstrAppWeb.pdb
+C:\Users\Thea\Documents\GitHub\Team27\monstrApp\monstrAppWeb\bin\monstrAppWeb.dll.config
+C:\Users\Thea\Documents\GitHub\Team27\monstrApp\monstrAppWeb\bin\monstrAppWeb.dll
+C:\Users\Thea\Documents\GitHub\Team27\monstrApp\monstrAppWeb\bin\monstrAppWeb.pdb
+C:\Users\Thea\Documents\GitHub\Team27\monstrApp\monstrAppWeb\obj\Debug\monstrAppWeb.csprojResolveAssemblyReference.cache
+C:\Users\Thea\Documents\GitHub\Team27\monstrApp\monstrAppWeb\obj\Debug\monstrAppWeb.dll
+C:\Users\Thea\Documents\GitHub\Team27\monstrApp\monstrAppWeb\obj\Debug\monstrAppWeb.pdb
+C:\Users\Mark\Documents\Team27-master\monstrApp\monstrAppWeb\bin\monstrAppWeb.dll.config
+C:\Users\Mark\Documents\Team27-master\monstrApp\monstrAppWeb\bin\monstrAppWeb.dll
+C:\Users\Mark\Documents\Team27-master\monstrApp\monstrAppWeb\bin\monstrAppWeb.pdb
+C:\Users\Mark\Documents\Team27-master\monstrApp\monstrAppWeb\obj\Debug\monstrAppWeb.csprojResolveAssemblyReference.cache
+C:\Users\Mark\Documents\Team27-master\monstrApp\monstrAppWeb\obj\Debug\monstrAppWeb.dll
+C:\Users\Mark\Documents\Team27-master\monstrApp\monstrAppWeb\obj\Debug\monstrAppWeb.pdb

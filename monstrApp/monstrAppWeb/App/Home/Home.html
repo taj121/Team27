@@ -10,17 +10,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <title></title>
     <script src="/Scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
-
     <link href="/Content/Office.css" rel="stylesheet" type="text/css" />
     <script src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js" type="text/javascript"></script>
-
     <!-- To enable offline debugging using a local reference to Office.js, use:                        -->
     <!-- <script src="../../Scripts/Office/MicrosoftAjax.js" type="text/javascript"></script>  -->
     <!-- <script src="../../Scripts/Office/1.1/office.js" type="text/javascript"></script>  -->
-
     <link href="/App/App.css" rel="stylesheet" type="text/css" />
     <script src="/App/App.js" type="text/javascript"></script>
-
     <link href="Home.css" rel="stylesheet" type="text/css" />
     <script src="Home.js" type="text/javascript"></script>
 </head>
@@ -32,20 +28,23 @@
     </div>
     <div id="content-main">
         <div class="padding">
-            <p><strong>Here is a clever explanation as to what the app is,
-            it's use to the user, and how to use the app</strong></p>
-            <p>(Here is a clever gif or picture showing the highlighting
-            of all the data)</p>
-            <p>For example:</p>           
-            To Find: <input id ="get" type="text" name="SearchItem" value=""><br>
-            <button id="get--selected-data">Check If In Data</button><br>
-            <button id="get-range-selection">Select Range</button>
-            <!--OpenMenu.html is the intended start of our app -- Home.html can be remodeled into an
-                introductory page but for now it's just something we can play around/test things
-                with-->
+
+            <p>
+                To begin, please select the data you wish to use in your query. (This is done by highlighting all of the cells
+                in your spreadsheet starting at A1). Then click 'Continue'. For help please use our tutorial
+            </p>
+
+            <!--To Find: <input id ="get" type="text" name="SearchItem" value=""><br>-->
+            <!--<button id="get-range-selection">Select Range</button>-->
+            <!--Users will use this button to input their data-->
+            <!--<button id="get--selected-data">Input selected data</button>--><br>
+
+
+            <!--NewOrSavedSearch.html is the next page-->
             <form action="../New_Search/OpenMenu.html">
-                <input type="submit" value="Go to Next Page">
+                <input type="submit" value="Continue" id="get--selected-data">
             </form>
+
             <p style="margin-top: 50px;">
                 <a target="_blank" href="https://go.microsoft.com/fwlink/?LinkId=276812">Find more samples online...</a>
             </p>
