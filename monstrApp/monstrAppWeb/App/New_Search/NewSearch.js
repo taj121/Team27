@@ -14,26 +14,16 @@
 
     //stores the current search array of form column-dataToSearchFor column being index 0 of internal array ~Thea
     var currentSearch = [];
-
+    
     /*
-    Function to convert letters to numbers, nigel
+    *   Function to convert letters to numbers. 
     */
     function convertLettersToNumbers(inputLetters) {
         var valueToReturn = 0;
         var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
         for (var i = 0, j = inputLetters.length - 1; i < inputLetters.length; j--, i++) {
-            valueToReturn += (alphabet.indexOf(inputLetters[i]) + 1) * Math.pow(alphabet.length, j);
-            // hi, 'BA' should return 52 or? 'AAA' 702, as far as I can tell from the way 
-            // excel sheet works anyways. As it increases 'A, B... Z, AA, AB,...AZ, BA, BB...
-            // YA, ... ZA, AAA...
-            // Let me know if it makes sense. Nigel
-
-            //Nigel you are 100% right. Sorry I thought it went A..Z, AA..ZZ, AAA..ZZZ. Must have
-            //been using a different version of excel at some point in my life. Dan
-
-            //The last thing is does javascript differentiate lower and upper case? In java I'd
-            //use: valueToReturn += (alphabet.indexOf(inputLetters[i].toUpperCase()) + 1)... etc.
-            //just in case the user enters lower but idk about javascript.
+            valueToReturn += (alphabet.indexOf(inputLetters[i].toUpperCase()) + 1) * Math.pow(alphabet.length, j);
         }
         return valueToReturn - 1;
     }

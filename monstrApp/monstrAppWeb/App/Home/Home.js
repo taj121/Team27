@@ -79,21 +79,6 @@
         }
     }
 
-
-    /*
-    *   Function to convert letters to numbers. 
-    */
-    function convertLettersToNumbers(inputLetters) {
-        var valueToReturn = 0;
-        var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-        for (var i = 0, j = inputLetters.length - 1; i < inputLetters.length; j--, i++)
-        {
-            valueToReturn += (alphabet.indexOf(inputLetters[i].toUpperCase()) + 1) * Math.pow(alphabet.length, j);
-        }
-        return valueToReturn - 1;
-    }
-
     /*
     *     Function to write data from one excel sheet to another
     *     The idea is to make the returned result from the search 
