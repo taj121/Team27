@@ -26,16 +26,29 @@
         </div>
     </div>
     <div id="content-main" class="padding">
-        <p><h3><strong>Insert saved searches dropdown menu</strong></h3></p>
+        <p><h3><strong>Please choose which saved search you would to run</strong></h3></p>
+        <form>
+            <select name="menu">
+                <option value=""></option>
+                <option value="">Save1</option>
+                <option value="">Save2</option>
+                <option value="">Save3</option>
+            </select>
+            <input type="button" onclick="location=this.form.menu.options[this.form.menu.selectedIndex].value;" value="OK">
+        </form>
+        <br />
+        <form action="../New_Search/View_Search_Details.html">
+            <input type="submit" value="Continue" />
+        </form>
+  
+        <form action="Help_Saved_Search_Menu.html">
+            <input type="submit" value="Help" />
+        </form>
+        <form action="../New_Search/OpenMenu.html">
+            <input type="submit" value="Back" />
+        </form>
     </div>
-    <form action="View_Search_Details.html">
-        <input type="submit" value="Continue" />
-    </form>
-    <br/>
-    <form action="Help_Saved_Search_Menu.html">
-        <input type="submit" value="Help" />
-    </form>
-    <form onclick="history.back(-1);" value="Back"></form>
+  
 
 
 </body>

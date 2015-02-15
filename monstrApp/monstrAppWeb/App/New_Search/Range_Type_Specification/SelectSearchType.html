@@ -41,6 +41,7 @@
                 link to an entirely different html page for each type. I'm OK doing either and I will bring
                 this up at our next mtg.-->
             <div style="text-align:center">
+                <!--
                 <form action="../Input_Menus/Input_SingleNumber.html">
                     <input type="submit" value="Single Number">
                 </form>
@@ -55,6 +56,16 @@
                 </form>
                 <form action="../Input_Menus/Input_MultipleWords.html">
                     <input type="submit" value="Multiple Words" />
+                </form>
+                -->
+                <form>
+                    <select name="menu">
+                        <option value=""></option>
+                        <option value="../Input_Menus/Input_MultipleNumbers.html">A number or numbers</option>
+                        <option value="../Input_Menus/Input_MultipleWords.html">A word or words</option>
+                        <option value="../Input_Menus/Input_RangeNumbers.html">A range of numbers</option>
+                    </select>
+                    <input type="button" onclick="location=this.form.menu.options[this.form.menu.selectedIndex].value;" value="OK">
                 </form>
    
                 <br />

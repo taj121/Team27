@@ -71,6 +71,9 @@
     <Content Include="App\Home\Home.css" />
     <Content Include="App\Home\Home.html" />
     <Content Include="App\Home\Home.js" />
+    <Content Include="App\New_Search\Output.html" />
+    <Content Include="App\New_Search\output.js" />
+    <Content Include="App\New_Search\View_Search_Details.html" />
     <Content Include="App\New_Search\Input_Menus\Input_Help_Pages\Help_MultipleNumberInput.html" />
     <Content Include="App\New_Search\Input_Menus\Input_Help_Pages\Help_MultipleWordInput.html" />
     <Content Include="App\New_Search\Input_Menus\Input_Help_Pages\Help_RangeInput.html" />

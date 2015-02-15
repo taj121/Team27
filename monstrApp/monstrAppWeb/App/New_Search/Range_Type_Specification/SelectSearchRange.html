@@ -15,11 +15,14 @@
     <!-- <script src="../../Scripts/Office/MicrosoftAjax.js" type="text/javascript"></script>  -->
     <!-- <script src="../../Scripts/Office/1.1/office.js" type="text/javascript"></script>  -->
 
+
     <link href="/App/App.css" rel="stylesheet" type="text/css" />
     <script src="/App/App.js" type="text/javascript"></script>
 
     <link href="/App/Home/Home.css" rel="stylesheet" type="text/css" />
-    <script src="/App/Home/Home.js" type="text/javascript"></script>
+    <!--<script src="/App/Home/Home.js" type="text/javascript"></script>-->
+    <script src="../NewSearch.js" type="text/javascript"></script>
+
 </head>
 <body>
     <div id="content-header">
@@ -34,10 +37,23 @@
         </p>
         <!--Note: this is not how I intend on asking for range input at the end... This will change as we
             flesh out different ways to ask for the user to select cells-->
-        <input type="text" id="search_col" />
+        <input type="text" id="get-col" />
         <br />
-        <form action="SelectSearchType.html">
-            <input type="submit" value="OK">
+        <!--<form>
+            <select name="menu">
+                <option value=""></option>-> removed since was causeing error and decided that numbers could be default ~Thea
+                <option value="../Input_Menus/Input_MultipleNumbers.html">A number or numbers</option>
+                removed options since they limited user functionality ~Thea
+            </select>
+            <input type="button" onclick="location=this.form.menu.options[this.form.menu.selectedIndex].value;" value="OK">
+        </form>-->
+        <p>Please input the values you wish to add to the search, separated by commas:</p>
+        <p>(E.g. apple,banana,1,2 adds apple, banana, 1 and 2 to the search)</p>
+
+        <input type="text" name="input" id="get-param" />
+        <br />
+        <form action="/App/New_Search/NewSearchEndMenu.html">
+            <input type="submit" value="Input search Data" id="add-search">
         </form>
         <form action="Help_SelectSearchRange.html">
             <input type="submit" value="Help">
