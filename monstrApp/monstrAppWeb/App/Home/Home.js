@@ -10,7 +10,7 @@
     //only happens on some program executions.. not sure if this is happening for others...
     Office.initialize = function (reason) {
         $(document).ready(function () 
-<<<<<<< HEAD
+
            { app.initialize();
 
            $('#get--selected-data').click(getDataFromSelection);
@@ -33,17 +33,6 @@
         return $('#get').val();
     }
 
-
-
-=======
-        {
-            app.initialize();
-            //will get data from user selection on click of button with this id ~Thea
-            $('#get--selected-data').click(getDataFromSelection);
-            //$('#get-range-selection').click(selectRange); no longer on page ~Thea
-        });
-    };
->>>>>>> 6146e1881ee8af6ff6a6d8e3b67d1dfd2c8ed155
     /*
     Updates global variable to user selection when called
     ~Thea
