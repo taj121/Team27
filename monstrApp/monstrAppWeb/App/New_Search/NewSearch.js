@@ -13,17 +13,55 @@
             $('#add-search').click(function () {
                 addNewSearch();
             });
+            $('#add_term').click(function () {
+                addTerm($('#get-param').val());
+            })
         });
     };
 
     //stores the current search array of form column-dataToSearchFor column being index 0 of internal array ~Thea
     var currentSearch = [];
+    var curTerms = []
+
+    //adds terms one at a time to the search paramaters for a given column.
+    //dynamically generates a button displaying each term.
+    //removes the button from the page and the term from the search parameters
+    //when the button is clicked. Dan
+    function addTerm(term) {
+
+        if (term != -1) {
+            //terms pushed to current search as they are entered
+            curTerms.push(term);
+            app.showNotification(curTerms);
+        }
+
+        //create button dynamically based on term entry
+        var $button = $('<button/>', {
+            type: 'button',
+            'class': 'dynBtn',
+            id: term,
+            text: term,
+            value: term,
+            click: function () {
+                app.showNotification("Removed term '" + $(this).attr("value") + "' from search");
+
+                var index = curTerms.indexOf($(this).attr("value"));
+                if (index > -1) {
+                    //terms spliced from current search as they are deleted
+                    curTerms.splice(index, 1);
+                }
+                $(this).remove();
+
+            }
+        });
+        $button.appendTo('#button_div');
+        $('#get-param').val("");
+
+    }
 
     function addNewSearch() {
         var newColIndex = convertLettersToNumbers($('#get-col').val());
-        var param = $('#get-param').val().replace(/\s+/g, ''); //remove all whitespaces
-        var params = param.split(",");
-        var searchCol = [newColIndex, params]; // [X,[1,2,3]]
+        var searchCol = [newColIndex, curTerms]; // [X,[1,2,3]]
         currentSearch.push(searchCol);
         localStorage["currentSearch"] = JSON.stringify(currentSearch);
     }

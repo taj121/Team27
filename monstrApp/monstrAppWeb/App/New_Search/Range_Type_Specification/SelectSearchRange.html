@@ -47,13 +47,15 @@
             </select>
             <input type="button" onclick="location=this.form.menu.options[this.form.menu.selectedIndex].value;" value="OK">
         </form>-->
-        <p>Please input the values you wish to add to the search, separated by commas:</p>
-        <p>(E.g. apple,banana,1,2 adds apple, banana, 1 and 2 to the search)</p>
+        <p>Please add search values one at a time</p>
 
         <input type="text" name="input" id="get-param" />
+        <input type="submit" value="Add term to search" id="add_term" />
+        <div id="button_div">
+        </div>
         <br />
         <form action="/App/New_Search/NewSearchEndMenu.html">
-            <input type="submit" value="Input search Data" id="add-search">
+            <input type="submit" value="OK" id="add-search">
         </form>
         <form action="Help_SelectSearchRange.html">
             <input type="submit" value="Help">
