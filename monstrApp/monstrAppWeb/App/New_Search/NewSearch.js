@@ -162,11 +162,17 @@
         for (var i = 0; i < currentSearch.length; i++) {
             details += "-Search in column " + currentSearch[i][0] + "for:\n  -"
             for (var j = 1; j < currentSearch[i].length; i++) {
-                if (j == currentSearch[i].length) {
-                    details += "and" + currentSearch[i][j] + ". \n \n"
+
+                if (currentSearch[i].length == 1) {
+                    details += currentSearch[i][j] + ". \n \n"
                 }
-                else {
-                    details += currentSearch[i][j] + ", ";
+                else{
+                    if (j == currentSearch[i].length) {
+                        details += "and" + currentSearch[i][j] + ". \n \n"
+                    }
+                    else {
+                        details += currentSearch[i][j] + ", ";
+                    }
                 }
 
             }
