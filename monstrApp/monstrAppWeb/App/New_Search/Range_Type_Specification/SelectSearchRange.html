@@ -32,22 +32,11 @@
     </div>
     <div id="content-main" class="padding" style="text-align:center;">
         <h2>Which column would you like to search?</h2>
-        <p>
-            Please input column letter:
-        </p>
-        <!--Note: this is not how I intend on asking for range input at the end... This will change as we
-            flesh out different ways to ask for the user to select cells-->
-        <input type="text" id="get_col" />
-        <!--<form>
-            <select name="menu">
-                <option value=""></option>-> removed since was causeing error and decided that numbers could be default ~Thea
-                <option value="../Input_Menus/Input_MultipleNumbers.html">A number or numbers</option>
-                removed options since they limited user functionality ~Thea
-            </select>
-            <input type="button" onclick="location=this.form.menu.options[this.form.menu.selectedIndex].value;" value="OK">
-        </form>-->
+        <p id="select_col">Please input column letter:</p>
+        <div id="col_area">
+            <input type="text" id="get_col" /><input type="submit" value="Submit" id="col_submit" />
+        </div>
         <p>Please add search values one at a time</p>
-
         <input type="text" name="input" id="get-param" />
         <input type="submit" value="Add term to search" id="add_term" />
         <div id="button_div">
@@ -56,22 +45,7 @@
         <form action="/App/New_Search/NewSearchEndMenu.html">
             <input type="submit" value="OK" id="add_search">
         </form>
-        <input type="submit" value="Select Column" id="select_column">
-        <br/>
-        <form action="SelectSearchType.html">
-            <input type="submit" value="Submit" id="check_column"/>
-        </form>
-        <br />
-            <!--<form action="/App/New_Search/NewSearchEndMenu.html">
-            <input type="submit" value="OK" />
->>>>>>> old_master
-        </form>
-        <form action="Help_SelectSearchRange.html">
-            <input type="submit" value="Help">
-        </form>
-        <form action="../OpenMenu.html">
-            <input type="submit" value="Back">
-        </form>-->
+
 </div>
 </body>
 </html>

@@ -5,7 +5,6 @@
     Office.initialize = function (reason) {
         $(document).ready(function () {
             app.initialize();
-            app.showNotification("sldkfj");
             //will add a new column to search in, initially will have nothing to search for ~Thea
             //$('#get-new-column').click(addNewColumn);
             //adds new values to the most resent column added to current search ~Thea
@@ -21,8 +20,27 @@
             $('#add_search').click(function () {
                 addNewSearch();
             });
+            $('#col_submit').click(function () {
+                    colSubmit($('#get_col').val());
+            })
         });
     };
+
+    var newColIndex;
+
+    function colSubmit(col) {
+        newColIndex = convertLettersToNumbers($('#get_col').val());
+        $("#get_col").remove();
+        $("#col_submit").remove();
+        $("#select_col").remove();
+
+        var $label = $('<label/>', {
+            type: 'label',
+            id: col,
+            text: "You selected column: " + col.toUpperCase(),
+        });
+        $label.appendTo("#col_area");
+    }
 
     //stores the current search array of form column-dataToSearchFor column being index 0 of internal array ~Thea
 
@@ -66,16 +84,14 @@
     }
 
     function addNewSearch() {
-        var newColIndex = convertLettersToNumbers($('#get_col').val());
         var searchCol = [newColIndex, curTerms]; // [X,[1,2,3]]
         currentSearch.push(searchCol);
         localStorage["currentSearch"] = JSON.stringify(currentSearch);
     }
 
     //Function that checks to make sure the user entered in an acceptable column. Dan
-    function checkColumn() {
-        if (column = "" || col_saved == false) {
-
+    function checkColumn(column) {
+        if (column = "") {
             return false;
         }
         var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -86,10 +102,7 @@
             else
                 return false;
         }
-        col_saved = false;
         return true;
-
-
     }
 
 
