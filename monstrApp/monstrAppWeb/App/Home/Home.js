@@ -15,7 +15,7 @@
 
            $('#get--selected-data').click(getDataFromSelection);
            $('#get-range-selection').click(selectRange);
-           $('#add_data').click(test);
+           //$('#add_data').click(test);
         });
     };
 

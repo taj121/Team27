@@ -5,28 +5,94 @@
     Office.initialize = function (reason) {
         $(document).ready(function () {
             app.initialize();
+            app.showNotification("sldkfj");
             //will add a new column to search in, initially will have nothing to search for ~Thea
             //$('#get-new-column').click(addNewColumn);
             //adds new values to the most resent column added to current search ~Thea
-            //$('#add-search-param').click(addNewParam);
+            //$('#ch-param').click(addNewParam);
             checkLocal();
-            $('#add-search').click(function () {
+            $('#select_column').click(function () {
+                selectColumn();
+            });
+
+            $('#add_term').click(function () {
+                addTerm($('#get-param').val());
+            });
+            $('#add_search').click(function () {
                 addNewSearch();
             });
         });
     };
 
     //stores the current search array of form column-dataToSearchFor column being index 0 of internal array ~Thea
+
     var currentSearch = [];
+    var curTerms = []
+
+    //adds terms one at a time to the search paramaters for a given column.
+    //dynamically generates a button displaying each term.
+    //removes the button from the page and the term from the search parameters
+    //when the button is clicked. Dan
+    function addTerm(term) {
+
+        if (term != -1) {
+            //terms pushed to current search as they are entered
+            curTerms.push(term);
+            app.showNotification(curTerms);
+        }
+
+        //create button dynamically based on term entry
+        var $button = $('<button/>', {
+            type: 'button',
+            'class': 'dynBtn',
+            id: term,
+            text: term,
+            value: term,
+            click: function () {
+                app.showNotification("Removed term '" + $(this).attr("value") + "' from search");
+
+                var index = curTerms.indexOf($(this).attr("value"));
+                if (index > -1) {
+                    //terms spliced from current search as they are deleted
+                    curTerms.splice(index, 1);
+                }
+                $(this).remove();
+
+            }
+        });
+        $button.appendTo('#button_div');
+        $('#get-param').val("");
+
+    }
 
     function addNewSearch() {
-        var newColIndex = convertLettersToNumbers($('#get-col').val());
-        var param = $('#get-param').val().replace(/\s+/g, ''); //remove all whitespaces
-        var params = param.split(",");
-        var searchCol = [newColIndex, params]; // [X,[1,2,3]]
+        var newColIndex = convertLettersToNumbers($('#get_col').val());
+        var searchCol = [newColIndex, curTerms]; // [X,[1,2,3]]
         currentSearch.push(searchCol);
         localStorage["currentSearch"] = JSON.stringify(currentSearch);
     }
+
+    //Function that checks to make sure the user entered in an acceptable column. Dan
+    function checkColumn() {
+        if (column = "" || col_saved == false) {
+
+            return false;
+        }
+        var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        for (var i = 0; i < column.length; i++) {
+            if (column[i] in alphabet) {
+                continue;
+            }
+            else
+                return false;
+        }
+        col_saved = false;
+        return true;
+
+
+    }
+
+
 
     function checkLocal() {
         currentSearch = localStorage.getItem("currentSearch");
