@@ -23,6 +23,9 @@
             $('#col_submit').click(function () {
                     colSubmit($('#get_col').val());
             })
+            $('#detail_toString').click(function () {
+                searchToString();
+            })
         });
     };
 
@@ -150,4 +153,25 @@
         column.push(param);
         currentSearch.push(column);
     }
-})();
+
+    /*Function to convert currentSearch[] to a String, for printing search details
+    -Mark
+    */
+    function searchToString() {
+        var details;
+        for (var i = 0; i < currentSearch.length; i++) {
+            details += "-Search in column " + currentSearch[i][0] + "for:\n  -"
+            for (var j = 1; j < currentSearch[i].length; i++) {
+                if (j == currentSearch[i].length) {
+                    details += "and" + currentSearch[i][j] + ". \n \n"
+                }
+                else {
+                    details += currentSearch[i][j] + ", ";
+                }
+
+            }
+            return details;
+        }
+
+    }
+    })();

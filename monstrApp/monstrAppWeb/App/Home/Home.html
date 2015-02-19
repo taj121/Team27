@@ -31,7 +31,7 @@
 
             <p>
                 To begin, please select the data you wish to use in your query. (This is done by highlighting all of the cells
-                in your spreadsheet starting at A1). Then click 'Continue'. For help please use our tutorial
+                in your spreadsheet starting at A1). Then choose either 'New Search' or 'Saved Search'. For help please use our tutorial
             </p>
 
             <!--To Find: <input id ="get" type="text" name="SearchItem" value=""><br>-->
@@ -39,10 +39,18 @@
             <!--Users will use this button to input their data-->
             <!--<button id="get-selected-data">Input selected data</button>--><br>
 
-
-            <!--NewOrSavedSearch.html is the next page-->
-            <form action="../New_Search/OpenMenu.html">
-                <input type="submit" value="Continue" id="get--selected-data">
+            <!--Takes user to new search menu-->
+            <form action="/App/New_Search/Range_Type_Specification/SelectSearchRange.html">
+                <input type="submit" value="New Search" id="get--selected-data">
+            </form>
+            <!--Takes user to saved search menu-->
+            <form action="/App/Saved_Search/Saved_Search_Menu.html">
+                <input type="submit" value="Saved Search" id="get--selected-data">
+            </form>
+            <!--Takes user to help menu (I am assuming we will create DIFFERENT help menus for each page
+        that cater specifically to what is on each page but I will bring this up at the next mtg)-->
+            <form action="NewSearchHelp.html">
+                <input type="submit" value="Tutorial">
             </form>
 
             <p style="margin-top: 50px;">
