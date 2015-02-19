@@ -37,8 +37,7 @@
         </p>
         <!--Note: this is not how I intend on asking for range input at the end... This will change as we
             flesh out different ways to ask for the user to select cells-->
-        <input type="text" id="get-col" />
-        <br />
+        <input type="text" id="get_col" />
         <!--<form>
             <select name="menu">
                 <option value=""></option>-> removed since was causeing error and decided that numbers could be default ~Thea
@@ -47,6 +46,7 @@
             </select>
             <input type="button" onclick="location=this.form.menu.options[this.form.menu.selectedIndex].value;" value="OK">
         </form>-->
+<<<<<<< HEAD
         <p>Please add search values one at a time</p>
 
         <input type="text" name="input" id="get-param" />
@@ -56,13 +56,26 @@
         <br />
         <form action="/App/New_Search/NewSearchEndMenu.html">
             <input type="submit" value="OK" id="add-search">
+=======
+        <input type="submit" value="Select Column" id="select_column">
+        <br/>
+        <form action="SelectSearchType.html">
+            <input type="submit" value="Submit" id="check_column"/>
+        </form>
+        <br />
+        <canvas id="myCanvas" width="200" height="100"
+                style="border:1px solid #000000;">
+        </canvas>
+            <!--<form action="/App/New_Search/NewSearchEndMenu.html">
+            <input type="submit" value="OK" />
+>>>>>>> old_master
         </form>
         <form action="Help_SelectSearchRange.html">
             <input type="submit" value="Help">
         </form>
         <form action="../OpenMenu.html">
             <input type="submit" value="Back">
-        </form>
-    </div>
+        </form>-->
+</div>
 </body>
 </html>
