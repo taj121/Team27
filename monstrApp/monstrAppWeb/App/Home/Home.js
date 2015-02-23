@@ -7,12 +7,18 @@
     //Dan note: This is causing an error for me all of a sudden..
     //only happens on some program executions.. not sure if this is happening for others...
     Office.initialize = function (reason) {
-        $(document).ready(function () 
-           { app.initialize();
-           $('#new-search').click(newSearch);
-           $('#saved-search').click(savedSearch);
-        });
+        $(document).ready(function () {
+            app.initialize();
+            bindButton(); 
+        });        
     };
+
+    function bindButton() {
+        $('#new-search').click(function () { newSearch(); });
+        $('#saved-search').click(function () { savedSearch(); });
+    }
+
+
     function getText() {
         return $('#get').val();
     }
@@ -43,7 +49,7 @@
             function (result) {
                 if (result.status === Office.AsyncResultStatus.Succeeded) {
                     if (result.value.length == 1) {
-                        app.showNotification('Error', 'Only one row has being selected!');
+                        app.showNotification('Error:', 'Only one row has being selected!');
                     } else {
                         //userDataSelection = result;
                         localStorage["userDataSelection"] = JSON.stringify(result);
