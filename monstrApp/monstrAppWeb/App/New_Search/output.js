@@ -49,7 +49,8 @@
         if (result.value != undefined) {
             for (var i = 0; i < result.value.length; i++) {
                 for (var j = 0; j < toFind.length; j++) {
-                    if (toFind[j] == result.value[i][col]) {
+                    var currentCheck = result.value[i][col].replace(/\s+/g, ''); //remove all whitespaces
+                    if (toFind[j] == currentCheck) {
                         foundAt.push(i);
                     }
                 }
