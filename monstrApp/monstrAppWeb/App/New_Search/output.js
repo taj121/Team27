@@ -9,6 +9,10 @@
         });
     };
 
+    /*
+    function gets rows to return. 
+    ~Thea
+    */
     function getResults() {
         //json.parse(localstorage["userDataSelection"]); how to get values back DO NOT UNCOMMENT OR DELETE!!!!!
         //localStorage.getItem("userDataSelection");
@@ -42,6 +46,7 @@
     }
 
     /*
+    Function to find the index of an array of serch parameters passed in. In a specific column
     ~Thea
     */
     function findIndex(toFind, col, result) {
