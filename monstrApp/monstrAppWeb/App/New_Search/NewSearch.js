@@ -34,6 +34,7 @@
     var currentSearch = [];
     var curTerms = [];
     var searchData = [];
+    var colAdded = 0; //boolean value to check if the user has entered a column ~Thea
 
     /*
     Gets the column to search
@@ -54,6 +55,7 @@
                     text: "You selected column: " + col.toUpperCase(),
                 });
                 $label.appendTo("#col_area");
+                colAdded = 1;
             } else {
                 app.showNotification("Error:", "Column index is not in selected data range.");
             }
@@ -65,41 +67,52 @@
     //removes the button from the page and the term from the search parameters
     //when the button is clicked. Dan
     function addTerm(term) {
-
-        if (term != -1) {
-            //terms pushed to current search as they are entered
-            curTerms.push(term);
-            app.showNotification(curTerms);
-        }
-
-        //create button dynamically based on term entry
-        var $button = $('<button/>', {
-            type: 'button',
-            'class': 'dynBtn',
-            id: term,
-            text: term,
-            value: term,
-            click: function () {
-                app.showNotification("Removed term '" + $(this).attr("value") + "' from search");
-
-                var index = curTerms.indexOf($(this).attr("value"));
-                if (index > -1) {
-                    //terms spliced from current search as they are deleted
-                    curTerms.splice(index, 1);
+        if (colAdded == 1) {
+            if (term != "") { 
+                if (term != -1) {
+                    //terms pushed to current search as they are entered
+                    curTerms.push(term);
+                    app.showNotification(curTerms);
                 }
-                $(this).remove();
+                //create button dynamically based on term entry
+                var $button = $('<button/>', {
+                    type: 'button',
+                    'class': 'dynBtn',
+                    id: term,
+                    text: term,
+                    value: term,
+                    click: function () {
+                        app.showNotification("Removed term '" + $(this).attr("value") + "' from search");
 
+                        var index = curTerms.indexOf($(this).attr("value"));
+                        if (index > -1) {
+                            //terms spliced from current search as they are deleted
+                            curTerms.splice(index, 1);
+                        }
+                        $(this).remove();
+
+                    }
+                });
+                $button.appendTo('#button_div');
+                $('#get-param').val("");
             }
-        });
-        $button.appendTo('#button_div');
-        $('#get-param').val("");
-
+            else {
+                app.showNotification("Error:", "You must enter a value to search for!");
+            }
+        } else {
+            app.showNotification("Error:","You must submit a column before entering search values");
+        }
     }
 
     function addNewSearch() {
-        var searchCol = [newColIndex, curTerms]; // [X,[1,2,3]]
-        currentSearch.push(searchCol);
-        localStorage["currentSearch"] = JSON.stringify(currentSearch);
+        if (curTerms.length != 0) {
+            var searchCol = [newColIndex, curTerms]; // [X,[1,2,3]]
+            currentSearch.push(searchCol);
+            localStorage["currentSearch"] = JSON.stringify(currentSearch);
+            window.location = "/App/New_Search/NewSearchEndMenu.html";
+        } else {
+            app.showNotification("Error:","You must add at least one search value!" );
+        }
     }
 
     //Function that checks to make sure the user entered in an acceptable column. Dan
