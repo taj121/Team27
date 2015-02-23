@@ -30,25 +30,35 @@
     };
 
     var newColIndex;
-
-    function colSubmit(col) {
-        newColIndex = convertLettersToNumbers($('#get_col').val());
-        $("#get_col").remove();
-        $("#col_submit").remove();
-        $("#select_col").remove();
-
-        var $label = $('<label/>', {
-            type: 'label',
-            id: col,
-            text: "You selected column: " + col.toUpperCase(),
-        });
-        $label.appendTo("#col_area");
-    }
-
     //stores the current search array of form column-dataToSearchFor column being index 0 of internal array ~Thea
-
     var currentSearch = [];
-    var curTerms = []
+    var curTerms = [];
+    var searchData = [];
+
+    /*
+    Gets the column to search
+    */
+    function colSubmit(col) {
+        newColIndex = $('#get_col').val();
+        if (newColIndex == "") {
+            app.showNotification("Error:", "No Column Selected");
+        } else {
+            newColIndex = convertLettersToNumbers(newColIndex);
+            if (newColIndex < searchData.value[0].length) {
+                $("#get_col").remove();
+                $("#col_submit").remove();
+                $("#select_col").remove();
+                var $label = $('<label/>', {
+                    type: 'label',
+                    id: col,
+                    text: "You selected column: " + col.toUpperCase(),
+                });
+                $label.appendTo("#col_area");
+            } else {
+                app.showNotification("Error:", "Column index is not in selected data range.");
+            }
+        }
+    }
 
     //adds terms one at a time to the search paramaters for a given column.
     //dynamically generates a button displaying each term.
@@ -107,9 +117,11 @@
         }
         return true;
     }
-
-
-
+    
+    /*
+    loads current search from local storage to allow new parameters to be added
+    loads data from local storage to allow check on column index to ensure it is valid
+    */
     function checkLocal() {
         currentSearch = localStorage.getItem("currentSearch");
         if (currentSearch || currentSearch === "") {
@@ -118,6 +130,7 @@
         else {
             currentSearch = [];
         }
+        searchData = JSON.parse(localStorage.getItem("userDataSelection"));
     }
 
     /*
