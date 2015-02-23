@@ -13,38 +13,58 @@
 
            { app.initialize();
 
-           $('#get--selected-data').click(getDataFromSelection);
-           $('#get-range-selection').click(selectRange);
+           //$('#get--selected-data').click(getDataFromSelection);
+           $('#new-search').click(newSearch);
+           $('#saved-search').click(savedSearch);
+           //$('#get-range-selection').click(selectRange); commented since button currently does not exist ~Thea
            //$('#add_data').click(test);
         });
     };
-
-    function test() {
-        app.showNotification("Added '" + $('#data_input').val() + "' to search");
-        var newLabel = document.createElement("label");
-        newLabel.innerHTML = $('#data_input').val();
-        document.body.appendChild(newLabel);
-
-        document.getElementById('data_input').value = "";
-        
-    }
-
     function getText() {
         return $('#get').val();
     }
 
     /*
-    Updates global variable to user selection when called
+    Updates global variable to user selection when called and loads new search page if data selected correctly
     ~Thea
     */
-    function getDataFromSelection() {
+    function newSearch() {
         localStorage.clear();
         Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix,
             function (result) {
                 if (result.status === Office.AsyncResultStatus.Succeeded) {
-                    //userDataSelection = result;
-                    localStorage["userDataSelection"] = JSON.stringify(result);
-                    //json.parse(localstorage["userDataSelection"]); how to get values back DO NOT UNCOMMENT OR DELETE!!!!!
+                    if (result.value.length == 1) {
+                        app.showNotification('Error: Only one row has being selected!');
+                    } else {
+                        //userDataSelection = result;
+                        localStorage["userDataSelection"] = JSON.stringify(result);
+                        window.location = "/App/New_Search/Range_Type_Specification/SelectSearchRange.html";
+                        //json.parse(localstorage["userDataSelection"]); how to get values back DO NOT UNCOMMENT OR DELETE!!!!!
+                    }
+                } else {
+                    app.showNotification('Error:', result.error.message);
+                }
+            }
+        );
+    }
+
+    /*
+    Updates global variable to user selection when called and changes to saved search page if data selected correctly
+    ~Thea
+    */
+    function savedSearch() {
+        localStorage.clear();
+        Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix,
+            function (result) {
+                if (result.status === Office.AsyncResultStatus.Succeeded) {
+                    if (result.value.length == 1) {
+                        app.showNotification('Error: Only one cell has being selected!');
+                    } else {
+                        //userDataSelection = result;
+                        localStorage["userDataSelection"] = JSON.stringify(result);
+                        window.location = "/App/Saved_Search/Saved_Search_Menu.html";
+                        //json.parse(localstorage["userDataSelection"]); how to get values back DO NOT UNCOMMENT OR DELETE!!!!!
+                    }
                 } else {
                     app.showNotification('Error:', result.error.message);
                 }
@@ -100,5 +120,16 @@
                 }
             }
         );
+    }
+
+
+    function test() {
+        app.showNotification("Added '" + $('#data_input').val() + "' to search");
+        var newLabel = document.createElement("label");
+        newLabel.innerHTML = $('#data_input').val();
+        document.body.appendChild(newLabel);
+
+        document.getElementById('data_input').value = "";
+
     }
 })();
