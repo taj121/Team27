@@ -4,7 +4,7 @@
     Office.initialize = function (reason) {
         $(document).ready(function () {
             app.initialize();
-            var toPrint = getResults();
+            var toPrint = toString(getResults());
             $("#return-data").text(toPrint);
         });
     };
@@ -14,8 +14,6 @@
     ~Thea
     */
     function getResults() {
-        //json.parse(localstorage["userDataSelection"]); how to get values back DO NOT UNCOMMENT OR DELETE!!!!!
-        //localStorage.getItem("userDataSelection");
         var data = JSON.parse(localStorage["userDataSelection"]);
         var temp = localStorage["currentSearch"];
         var searchFor = JSON.parse(temp);
@@ -42,7 +40,31 @@
             }
             data = newData;
         }
+        printToWindow(toString(data));
         return data;
+    }
+    /*
+    Function to write out the rows to return in a nice way.
+    ~Thea
+    */
+    function toString(returnData) {
+        var returnString = "";
+        for (var i = 0; i < returnData.length; i++) {
+            for (var j = 0; j < returnData[i].length; j++) {
+                returnString += (returnData[i][j] + "\t");
+            }
+            returnString += "\n";
+        }
+        return returnString;
+    }
+    
+    /*
+    function to write out return data to a new browser window, takes string version of data.
+    ~Thea
+    */
+    function printToWindow(data) {
+        var myWindow = window.open("", "MsgWindow", "width=500, height=500");
+        myWindow.document.write("<pre>"+data+"</pre>");
     }
 
     /*
