@@ -1,6 +1,4 @@
 ﻿/// <reference path="../App.js" />
-//nigel fdgsfg
-//danny v
 
 (function () {
     "use strict";
@@ -10,14 +8,9 @@
     //only happens on some program executions.. not sure if this is happening for others...
     Office.initialize = function (reason) {
         $(document).ready(function () 
-
            { app.initialize();
-
-           //$('#get--selected-data').click(getDataFromSelection);
            $('#new-search').click(newSearch);
            $('#saved-search').click(savedSearch);
-           //$('#get-range-selection').click(selectRange); commented since button currently does not exist ~Thea
-           //$('#add_data').click(test);
         });
     };
     function getText() {
@@ -29,23 +22,7 @@
     ~Thea
     */
     function newSearch() {
-        localStorage.clear();
-        Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix,
-            function (result) {
-                if (result.status === Office.AsyncResultStatus.Succeeded) {
-                    if (result.value.length == 1) {
-                        app.showNotification('Error: Only one row has being selected!');
-                    } else {
-                        //userDataSelection = result;
-                        localStorage["userDataSelection"] = JSON.stringify(result);
-                        window.location = "/App/New_Search/Range_Type_Specification/SelectSearchRange.html";
-                        //json.parse(localstorage["userDataSelection"]); how to get values back DO NOT UNCOMMENT OR DELETE!!!!!
-                    }
-                } else {
-                    app.showNotification('Error:', result.error.message);
-                }
-            }
-        );
+        getSelectedData("/App/New_Search/Range_Type_Specification/SelectSearchRange.html");
     }
 
     /*
@@ -53,16 +30,24 @@
     ~Thea
     */
     function savedSearch() {
+        getSelectedData("/App/Saved_Search/Saved_Search_Menu.html");
+    }
+
+    /*
+    updates the global variable and sets the new page to be the corerct page. Will change if more than one row is inputed
+    ~Thea
+    */
+    function getSelectedData(url) {
         localStorage.clear();
         Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix,
             function (result) {
                 if (result.status === Office.AsyncResultStatus.Succeeded) {
                     if (result.value.length == 1) {
-                        app.showNotification('Error: Only one cell has being selected!');
+                        app.showNotification('Error', 'Only one row has being selected!');
                     } else {
                         //userDataSelection = result;
                         localStorage["userDataSelection"] = JSON.stringify(result);
-                        window.location = "/App/Saved_Search/Saved_Search_Menu.html";
+                        window.location = url;
                         //json.parse(localstorage["userDataSelection"]); how to get values back DO NOT UNCOMMENT OR DELETE!!!!!
                     }
                 } else {
@@ -121,7 +106,6 @@
             }
         );
     }
-
 
     function test() {
         app.showNotification("Added '" + $('#data_input').val() + "' to search");
