@@ -42,10 +42,12 @@
     function colSubmit(col) {
         newColIndex = $('#get_col').val();
         if (newColIndex == "") {
+            app.hideAllNotification();
             app.showNotification("Error:", "No Column Selected");
         } else {
             newColIndex = convertLettersToNumbers(newColIndex);
             if (newColIndex < searchData.value[0].length) {
+                app.hideAllNotification();
                 $("#get_col").remove();
                 $("#col_submit").remove();
                 $("#select_col").remove();
@@ -57,6 +59,7 @@
                 $label.appendTo("#col_area");
                 colAdded = 1;
             } else {
+                app.hideAllNotification();
                 app.showNotification("Error:", "Column index is not in selected data range.");
             }
         }
@@ -72,7 +75,8 @@
                 if (term != -1) {
                     //terms pushed to current search as they are entered
                     curTerms.push(term);
-                    app.showNotification(curTerms);
+                    app.hideAllNotification();
+                    app.showNotification("You are searchig for:",curTerms);
                 }
                 //create button dynamically based on term entry
                 var $button = $('<button/>', {
@@ -82,7 +86,8 @@
                     text: term,
                     value: term,
                     click: function () {
-                        app.showNotification("Removed term '" + $(this).attr("value") + "' from search");
+                        app.hideAllNotification();
+                        app.showNotification("Removed the following term from search:'" , $(this).attr("value") );
 
                         var index = curTerms.indexOf($(this).attr("value"));
                         if (index > -1) {
@@ -97,9 +102,11 @@
                 $('#get-param').val("");
             }
             else {
+                app.hideAllNotification();
                 app.showNotification("Error:", "You must enter a value to search for!");
             }
         } else {
+            app.hideAllNotification();
             app.showNotification("Error:","You must submit a column before entering search values");
         }
     }
@@ -111,6 +118,7 @@
             localStorage["currentSearch"] = JSON.stringify(currentSearch);
             window.location = "/App/New_Search/NewSearchEndMenu.html";
         } else {
+            app.hideAllNotification();
             app.showNotification("Error:","You must add at least one search value!" );
         }
     }

@@ -49,14 +49,17 @@
             function (result) {
                 if (result.status === Office.AsyncResultStatus.Succeeded) {
                     if (result.value.length == 1) {
+                        app.hideAllNotification();
                         app.showNotification('Error:', 'Only one row has being selected!');
                     } else {
+                        app.hideAllNotification();
                         //userDataSelection = result;
                         localStorage["userDataSelection"] = JSON.stringify(result);
                         window.location = url;
                         //json.parse(localstorage["userDataSelection"]); how to get values back DO NOT UNCOMMENT OR DELETE!!!!!
                     }
                 } else {
+                    app.hideAllNotification();
                     app.showNotification('Error:', result.error.message);
                 }
             }
@@ -88,10 +91,12 @@
                 // Write data in original to the binding in new 
                 Office.select("bindings#exportedBinding").setDataAsync(originalData, { coercionType: "matrix" }, function (asyncResult) {
                     if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                        app.showNotification("Error: " + asyncResult.error.message);
+                        app.hideAllNotification();
+                        app.showNotification("Error: " , asyncResult.error.message);
                     }
                     else {
-                        app.showNotification("Export data from original sheet to target sheet successfully");
+                        app.hideAllNotification();
+                        app.showNotification("Export data from original sheet to target sheet successfully", "");
                     }
                 });
             }
@@ -104,9 +109,11 @@
             { id: "MatrixBinding" },
             function (asyncResult) {
                 if (Office.AsyncResultStatus.Succeeded) {
+                    app.hideAllNotification();
                     app.showNotification("Added range: " + asyncResult.value.type
-                        + " and id: " + asyncResult.value.id);
+                        + " and id: " + asyncResult.value.id, "");
                 } else {
+                    app.hideAllNotification();
                     app.showNotification('Error:', asyncResult.error.message);
                 }
             }
@@ -114,7 +121,8 @@
     }
 
     function test() {
-        app.showNotification("Added '" + $('#data_input').val() + "' to search");
+        app.hideAllNotification();
+        app.showNotification("Added '" + $('#data_input').val() + "' to search", "");
         var newLabel = document.createElement("label");
         newLabel.innerHTML = $('#data_input').val();
         document.body.appendChild(newLabel);
