@@ -77,7 +77,7 @@
             for (var i = 0; i < result.value.length; i++) {
                 for (var j = 0; j < toFind.length; j++) {
                     var currentCheck = result.value[i][col].replace(/\s+/g, ''); //remove all whitespaces
-                    if (toFind[j].toUpperCase() == currentCheck.toUpperCase()) {
+                    if (toFind[j].toUpperCase() == currentCheck.toUpperCase().replace(/\s+/g, '')) {
                         foundAt.push(i);
                     }
                 }

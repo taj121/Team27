@@ -15,7 +15,7 @@
             });
 
             $('#add_term').click(function () {
-                addTerm($('#get-param').val().replace(/\s+/g, '')); //remove all whitespaces
+                addTerm($('#get-param').val()); //remove all whitespaces
             });
             $('#add_search').click(function () {
                 addNewSearch();
