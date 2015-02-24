@@ -9,7 +9,8 @@
     Office.initialize = function (reason) {
         $(document).ready(function () {
             app.initialize();
-            bindButton(); 
+            bindButton();
+            checkIfSavedSearches();
         });        
     };
 
@@ -53,7 +54,6 @@
                         app.showNotification('Error:', 'Only one row has being selected!');
                     } else {
                         app.hideAllNotification();
-                        //userDataSelection = result;
                         localStorage["userDataSelection"] = JSON.stringify(result);
                         window.location = url;
                         //json.parse(localstorage["userDataSelection"]); how to get values back DO NOT UNCOMMENT OR DELETE!!!!!
@@ -129,5 +129,15 @@
 
         document.getElementById('data_input').value = "";
 
+    }
+    //check if saved searches
+    //~Thea
+    function checkIfSavedSearches() {
+        var names = Office.context.document.settings.get('search_names');
+        if (names || names === "") {
+        }
+        else {
+            $("#saved-search").attr("disabled",true);
+        }
     }
 })();

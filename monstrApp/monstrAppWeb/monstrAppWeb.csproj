@@ -95,6 +95,7 @@
     <Content Include="App\New_Search\Range_Type_Specification\Specification_Help_Pages\Help_SelectSearchRange.html" />
     <Content Include="App\New_Search\Range_Type_Specification\Specification_Help_Pages\Help_SelectSearchType.html" />
     <Content Include="App\New_Search\Save_Search.html" />
+    <Content Include="App\Saved_Search\loadSavedSearch.js" />
     <Content Include="App\Saved_Search\Saved_Search_Menu.html" />
     <Content Include="Content\Office.css" />
     <Content Include="Images\Close.png" />

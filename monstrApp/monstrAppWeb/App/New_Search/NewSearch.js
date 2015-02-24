@@ -26,6 +26,9 @@
             $('#detail_toString').click(function () {
                 searchToString();
             })
+            $('#save_search').click(function () {
+                saveSearch($('#user_name').val());
+            })
         });
     };
 
@@ -212,6 +215,27 @@
             }
             return details;
         }
-
     }
+
+    /*
+    function to save a search, must be passed a name given by the user.
+    untested since not sure if fron end is correct atm and also dont have time to add in dialog box for it right now
+    ~Thea
+    */
+    function saveSearch(searchName) {
+        //save actuall search
+        Office.context.document.settings.set(searchName, JSON.stringify(currentSearch));
+        //get names of searches already saved
+        var names = Office.context.document.settings.get('search_names');
+        if (names || names === "") {
+            JSON.parse(names);
+        }
+        else {
+            names = [];
+        }
+        names.push(searchName);
+        //save name of search in array of names of search
+        Office.context.document.settings.set('search_names', JSON.stringify(names));
+    }
+
     })();
