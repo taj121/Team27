@@ -61,11 +61,30 @@
                 });
                 $label.appendTo("#col_area");
                 colAdded = 1;
-            } else {
+            }
+            //Thea -- added a check to make sure that column input is of valid characters
+            //i.e. user can't add non-letters. Dan
+            else {
                 app.hideAllNotification();
-                app.showNotification("Error:", "Column index is not in selected data range.");
+                if (!(verifyColInput($('#get_col').val()))) {
+                    app.showNotification("Error:", "Not a valid column entry");
+                }
+                else {
+                    app.showNotification("Error:", "Column index is not in selected data range.");
+                }
             }
         }
+    }
+
+    //Check if column input is of valid letters
+    function verifyColInput(column) {
+        var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        for (var i = 0; i < column.length; i++) {
+            if (alphabet.indexOf(column.substring(i, (i+1)).toUpperCase()) == -1) {
+                return false;
+            }
+        }
+        return true;
     }
 
     //adds terms one at a time to the search paramaters for a given column.
