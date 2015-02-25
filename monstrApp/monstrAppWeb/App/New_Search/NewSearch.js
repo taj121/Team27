@@ -47,6 +47,9 @@
         if (newColIndex == "") {
             app.hideAllNotification();
             app.showNotification("Error:", "No Column Selected");
+        }
+        else if (!(verifyColInput($('#get_col').val()))) {
+            app.showNotification("Error:", "Not a valid column entry");
         } else {
             newColIndex = convertLettersToNumbers(newColIndex);
             if (newColIndex < searchData.value[0].length) {
@@ -66,12 +69,7 @@
             //i.e. user can't add non-letters. Dan
             else {
                 app.hideAllNotification();
-                if (!(verifyColInput($('#get_col').val()))) {
-                    app.showNotification("Error:", "Not a valid column entry");
-                }
-                else {
-                    app.showNotification("Error:", "Column index is not in selected data range.");
-                }
+                app.showNotification("Error:", "Column index is not in selected data range.");
             }
         }
     }
