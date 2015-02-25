@@ -5,6 +5,7 @@
         $(document).ready(function () {
             app.initialize();
             getNamesSaved();
+            $('#run_selected').click(loadSelectedSearch());
         });
     };
 
@@ -28,6 +29,16 @@
         else {
             app.showNotification("Error:","You must save a search before you can use this menu")
         }
+    }
+
+    /*
+    function that will set current search to be the selected saved search
+    ~Thea
+    */
+    function loadSelectedSearch() {
+        var searchName = $('#saved_searches option:selected').val();
+        var search = Office.context.document.settings.get(searchName);
+        localStorage["currentSearch"] =search;
     }
 
 })();
