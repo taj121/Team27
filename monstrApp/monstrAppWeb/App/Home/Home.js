@@ -47,11 +47,14 @@
     function getSelectedData(url) {
         localStorage.clear();
         Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix,
+            {   
+                valueFormat: Office.ValueFormat.Formatted,
+            },
             function (result) {
                 if (result.status === Office.AsyncResultStatus.Succeeded) {
                     if (result.value.length == 1) {
                         app.hideAllNotification();
-                        app.showNotification('Error:', 'Only one row has been selected!');
+                        app.showNotification('Error:', 'Only one row has being selected!');
                     } else {
                         app.hideAllNotification();
                         localStorage["userDataSelection"] = JSON.stringify(result);
