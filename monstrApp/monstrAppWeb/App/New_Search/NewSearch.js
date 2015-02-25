@@ -9,13 +9,13 @@
             //$('#get-new-column').click(addNewColumn);
             //adds new values to the most resent column added to current search ~Thea
             //$('#ch-param').click(addNewParam);
-            checkLocal();
+            checkLocal(); //load the current search
             $('#select_column').click(function () {
                 selectColumn();
             });
 
             $('#add_term').click(function () {
-                addTerm($('#get-param').val()); //remove all whitespaces
+                addTerm($('#get-param').val()); 
             });
             $('#add_search').click(function () {
                 addNewSearch();
@@ -26,8 +26,8 @@
             $('#detail_toString').click(function () {
                 searchToString();
             })
-            $('#save_search').click(function () {
-                saveSearch($('#user_name').val());
+            $('#name_submit').click(function () {
+                saveSearch($('#save_name').val());
             })
         });
     };
@@ -242,19 +242,46 @@
     ~Thea
     */
     function saveSearch(searchName) {
-        //save actuall search
-        Office.context.document.settings.set(searchName, JSON.stringify(currentSearch));
         //get names of searches already saved
         var names = Office.context.document.settings.get('search_names');
         if (names || names === "") {
-            JSON.parse(names);
+            names=JSON.parse(names);
         }
         else {
             names = [];
         }
-        names.push(searchName);
-        //save name of search in array of names of search
-        Office.context.document.settings.set('search_names', JSON.stringify(names));
+        //check if name is in use
+        var nameFound = 0;
+        for (var i = 0; i < names.length; i++) {
+            if (searchName === names[i]) {
+                app.hideAllNotification();
+                app.showNotification("Error:", "This name is already in use.")
+                nameFound = 1;
+            }
+        }
+        //if the name isn't already in use
+        if (nameFound == 0) {
+            //save actuall search
+            Office.context.document.settings.set(searchName, JSON.stringify(currentSearch));
+            Office.context.document.settings.saveAsync(function (asyncResult) {
+                if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+                    app.showNotification('Settings save failed. Error: ' + asyncResult.error.message);
+                } else {
+                    app.showNotification('Settings saved.');
+                }
+            });
+            names.push(searchName);
+            //save name of search in array of names of search
+            var temp = JSON.stringify(names);
+            Office.context.document.settings.set('search_names', JSON.stringify(names));
+            Office.context.document.settings.saveAsync(function (asyncResult) {
+                if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+                    app.showNotification('Settings save failed. Error: ' + asyncResult.error.message);
+                } else {
+                    app.showNotification('Settings saved.');
+                }
+            });
+        }
     }
 
     })();

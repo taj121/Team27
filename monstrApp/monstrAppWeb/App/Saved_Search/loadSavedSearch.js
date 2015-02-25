@@ -8,15 +8,22 @@
         });
     };
 
-    //saved_searches
+    /*
+    load names of saved searches
+    ~Thea
+    */
     function getNamesSaved() {
         var names = Office.context.document.settings.get('search_names');
         if (names || names === "") {
-            JSON.parse(names);
-            select = document.getElementById('names');
-            for (name in names) {
-                select.add(new Option(names[name]));
+            names=JSON.parse(names);
+            var select = document.getElementById('saved_searches');
+            for (var i = 0; i < names.length; i++) {
+                var opt = document.createElement('option');
+                opt.innerHTML = names[i];
+                opt.value = names[i];
+                select.appendChild(opt);
             }
+
         }
         else {
             app.showNotification("Error:","You must save a search before you can use this menu")
