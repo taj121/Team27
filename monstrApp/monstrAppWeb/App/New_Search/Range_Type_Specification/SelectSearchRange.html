@@ -34,16 +34,25 @@
         <h2>Which column would you like to search?</h2>
         <p id="select_col">Please input column letter:</p>
         <div id="col_area">
-            <input type="text" id="get_col" /><input type="submit" value="Submit" id="col_submit" />
+            <input type="text" id="get_col" /> <input type="submit" value="Submit" id="col_submit" />
         </div>
-        <p>Please add search values one at a time</p>
-        <input type="text" name="input" id="get-param" />
-        <input type="submit" value="Add term to search" id="add_term" />
-        <div id="button_div">
+        <br/>
+        <div id="op_input" style="display:none">
+            <select id="input_options"></select> <input type="submit" value="OK" id="input_select" />
         </div>
         <br />
-        <!--moved action to js to allow for error messages ~Thea-->
-        <input type="submit" value="OK" id="add_search">
+        <div id="word_num_menu" style="display:none">
+            <input type="text" id="single_input" /> <input type="submit" value="OK" id="OK_single_input" />
+            <br/>
+        </div>
+        <div id="range_menu" style="display:none">
+            <input type="text" size="10" /> - <input type="text" size="10" /> <input type="submit" value="OK" id="OK_range_nums" />
+            <br/>
+        </div>
+        <div id="excel_input" style="display:none">
+            Working on it doods
+        </div>
+        <input type="submit" value="Submit" id="submit_input" style="display:none"/>
 
 </div>
 </body>

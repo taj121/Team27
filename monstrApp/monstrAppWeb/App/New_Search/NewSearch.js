@@ -10,14 +10,20 @@
             //adds new values to the most resent column added to current search ~Thea
             //$('#ch-param').click(addNewParam);
             checkLocal(); //load the current search
+
+            loadInputOptions();
+            $('#input_select').click(function () {
+                loadInputMenu();
+            });
+
             $('#select_column').click(function () {
                 selectColumn();
             });
 
-            $('#add_term').click(function () {
-                addTerm($('#get-param').val()); 
+            $('#OK_single_input').click(function () {
+                addTerm($('#single_input').val()); 
             });
-            $('#add_search').click(function () {
+            $('#submit_input').click(function () {
                 addNewSearch();
             });
             $('#col_submit').click(function () {
@@ -39,6 +45,35 @@
     var searchData = [];
     var colAdded = 0; //boolean value to check if the user has entered a column ~Thea
 
+
+    function loadInputOptions() {
+        if ($('#input_options').length) {
+            var list = document.getElementById('input_options');
+            var options = ["Words and Numbers", "A range of numbers", "Dates", "Value from excel"]
+            for (var i = 0; i < options.length; i++) {
+                var value = document.createElement('option');
+                value.innerHTML = options[i];
+                value.value = options[i];
+                list.appendChild(value);
+            }
+        }
+    }
+
+    function loadInputMenu() {
+        var typeName = $('#input_options option:selected').val();
+        $('#submit_input').show();
+
+        if (typeName == "Words and Numbers") {
+            $("#range_menu").hide();
+            $("#word_num_menu").show();
+        }
+        else if (typeName == "A range of numbers") {
+            $("#word_num_menu").hide();
+            $("#range_menu").show();      
+        }
+    }
+
+   
     /*
     Gets the column to search
     */
@@ -72,6 +107,7 @@
                 app.showNotification("Error:", "Column index is not in selected data range.");
             }
         }
+        $('#op_input').show();
     }
 
     //Check if column input is of valid letters
@@ -96,7 +132,7 @@
                     //terms pushed to current search as they are entered
                     curTerms.push(term);
                     app.hideAllNotification();
-                    app.showNotification("You are searchig for:",curTerms);
+                    app.showNotification("You are searching for:",curTerms);
                 }
                 //create button dynamically based on term entry
                 var $button = $('<button/>', {
@@ -118,8 +154,8 @@
 
                     }
                 });
-                $button.appendTo('#button_div');
-                $('#get-param').val("");
+                $button.appendTo('#word_num_menu');
+                $('#single_input').val("");
             }
             else {
                 app.hideAllNotification();
