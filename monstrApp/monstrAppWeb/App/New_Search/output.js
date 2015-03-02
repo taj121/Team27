@@ -80,6 +80,7 @@
                     if (typeof currentCheck != "string") {
                         currentCheck=String(currentCheck);
                     }
+                    //this returns an error when working with ranges. I'll look into it more when I'm less tired. Dan
                     if (toFind[j].toUpperCase().replace(/\s+/g, '') == currentCheck.toUpperCase().replace(/\s+/g, '')) {
                         foundAt.push(i);
                     }

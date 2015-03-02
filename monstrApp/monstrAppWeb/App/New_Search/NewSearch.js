@@ -23,6 +23,10 @@
             $('#OK_single_input').click(function () {
                 addTerm($('#single_input').val()); 
             });
+            
+            $('#OK_range_nums').click(function () {
+                addRange($('#range_begin').val(), $('#range_end').val())
+            })
             $('#submit_input').click(function () {
                 addNewSearch();
             });
@@ -154,7 +158,7 @@
 
                     }
                 });
-                $button.appendTo('#word_num_menu');
+                $button.appendTo('#all_terms');
                 $('#single_input').val("");
             }
             else {
@@ -165,6 +169,59 @@
             app.hideAllNotification();
             app.showNotification("Error:","You must submit a column before entering search values");
         }
+    }
+
+    function addRange(rbegin, rend) {
+        if (colAdded == 1) {
+            if (rbegin != "" && rend != "") {
+                if (rbegin != -1 && rend != -1) {
+                    if (rbegin <= rend) {
+                        //terms pushed to current search as they are entered
+                        var str = ""
+                        for (var i = rbegin; i <= rend; i++) {
+                            curTerms.push(i);
+                            app.hideAllNotification();
+                            str += i + ", "
+                        }
+                        var $button = $('<button/>', {
+                            type: 'button',
+                            'class': 'dynBtn',
+                            text: "range: " + rbegin + "-" + rend,
+                            value: "range: " + rbegin + "-" + rend,
+                            click: function () {
+                                app.hideAllNotification();
+                                app.showNotification("Removed the following term from search:'", $(this).attr("value"));
+
+                                for (var i = rbegin; i <= rend; i++) {
+                                    var index = curTerms.indexOf(i);
+                                    if (index > -1) {
+                                        //terms spliced from current search as they are deleted
+                                        curTerms.splice(index, 1);
+                                    } 
+                                }
+                                $(this).remove();
+                                
+
+                            }
+                        });
+                        $button.appendTo('#all_terms');
+                        $('#range_begin').val("");
+                        $('#range_end').val("");
+                    } else {
+                        app.hideAllNotification();
+                        app.showNotification("Error:", "The beginning of the range must be a lower value than the end of the range.")
+                    }
+                }
+                else {
+                    app.hideAllNotification();
+                    app.showNotification("Error:", "You must enter a value to search for!");
+                }
+            } else {
+                app.hideAllNotification();
+                app.showNotification("Error:","You must submit a column before entering search values");
+            }
+        }
+        app.showNotification("Searching for: " + str);
     }
 
     function addNewSearch() {
