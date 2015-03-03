@@ -30,49 +30,42 @@
             <h2>Add Field - Select Search Range</h2>
         </div>
     </div>
-    <div id="content-main" class="padding" style="text-align:center">
+    <div id="content-main" class="padding">
         <div id="col_area">
-            <h2>Which column would you like to search?</h2>
-            <h3>Input column letters:</h3>
-            <input type="text" id="get_col" onkeydown="if (event.keyCode == 13) {document.getElementById('col_submit').click()}"   /> <input type="submit" value="Submit" id="col_submit" />
+            <h4>Which column would you like to search?</h4>
+            <input type="text" id="get_col" value="Input column letter(s)" onclick ="this.value = ''"onkeydown="if (event.keyCode == 13) {document.getElementById('col_submit').click()}" /> <input type="submit" value="Submit" id="col_submit" />
             <br/>
         </div>
-        <div id="show_col"></div>
-        <div id="op_input" style="display:none">
-            <br />
-            <select id="input_options" onkeydown=" if (event.keyCode == 13) { if (this.value != '') { document.getElementById('input_select').click() } }"></select> <input type="submit" value="OK" id="input_select" />
-            <br />
+
+        <div id="show_col">
         </div>
         
         <div id="word_num_menu" style="display:none">
             <br />
-            <input type="text" id="single_input" onkeydown="if (event.keyCode == 13){ if (this.value != '') { document.getElementById('OK_single_input').click() } }"/> <input type="submit" value="OK" id="OK_single_input" />
+            <h5>Please enter terms one at a time:</h5>
+            <input type="text" id="single_input" value="Input term here" onclick="this.value = ''" onkeydown="if (event.keyCode == 13){ if (this.value != '') { document.getElementById('OK_single_input').click() } }" /> <input type="submit" value="OK" id="OK_single_input" />
             <br />
         </div>
 
-        <div id="range_menu" style="display:none">
-            <input type="text" size="10" id="range_begin" /> - <input type="text" size="10" id="range_end" onkeydown="if (event.keyCode == 13) { document.getElementById('OK_range_nums').click() }" /> <input type="submit" value="OK" id="OK_range_nums" />
-            <br/>
-        </div>
-
-        <div id="excel_input" style="display:none">
-            Working on it doods
-            <br/>
+        
+        <div id="end_btns" style="display:none">
+            <br />
+            <br />
+            <input type="submit" value="Add This Column to Search" id="run_again"/>
         </div>
 
         <div id="all_terms" style="display:none">
             <br />
-            Current Search:
             <br />
+            <h4>Current Search:</h4>
         </div>
-        <div id="end_btns" style="display:none">
-            <br />
-            <br />
-            <input type="submit" value="Add Another Column to Search" id="run_again"/>
-            <form action="/App/New_Search/NewSearchEndMenu.html">
+
+        <div id="final_btns" style="display:none">
+                <br />
+                <br />
+                <input type="submit" value="Add Another Column to Search" id="add_another" />
                 <input type="submit" value="Finish and Run Search" id="submit_input"/>
-            </form>
-</div>
+        </div>
   
 
 </div>

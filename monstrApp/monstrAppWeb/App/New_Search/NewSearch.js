@@ -10,12 +10,6 @@
             //adds new values to the most resent column added to current search ~Thea
             //$('#ch-param').click(addNewParam);
             checkLocal(); //load the current search
-
-            loadInputOptions();
-            $('#input_select').click(function () {
-                loadInputMenu();
-            });
-
             $('#select_column').click(function () {
                 selectColumn();
             });
@@ -24,24 +18,23 @@
                 addTerm($('#single_input').val()); 
             });
             
-            $('#OK_range_nums').click(function () {
-                addRange($('#range_begin').val(), $('#range_end').val())
-            })
+
             $('#submit_input').click(function () {
-                addNewSearch();
+                checkEntry();
             });
+
             $('#col_submit').click(function () {
                 colSubmit($('#get_col').val());
             })
-            $('#detail_toString').click(function () {
-                searchToString();
-            })
+
             $('#name_submit').click(function () {
                 saveSearch($('#save_name').val());
             })
             $('#run_again').click(function () {
                 addNewField();
-                addNewSearch();
+            })
+            $('#add_another').click(function () {
+                addAnother();
             })
         });
     };
@@ -57,72 +50,64 @@
 
 
     function addNewField() {
-       
-        var str = curTerms[0];
-        $('#'+curTerms[0]).remove();
-        for (var i = 1; i < curTerms.length; i++) {
-            $('#' + curTerms[i]).remove();
-            str += ", " + curTerms[i];
-        }
-        var $button = $('<button/>', {
-            type: 'button',
-            'class': 'dynBtn',
-            id: str,
-            text: "Searching Col: " + newColIndex + " for " + str,
-            value: "Searching Col: " + newColIndex + " for " + str,
-            click: function () {
-                app.hideAllNotification();
-                app.showNotification("Removed the following term from search:'", $(this).attr("value"));
 
-                //var index = curTerms.indexOf($(this).attr("value"));
-                //if (index > -1) {
-                    //terms spliced from current search as they are deleted
-                //    curTerms.splice(index, 1);
-                //}
-                $(this).remove();
+        if (curTerms.length != 0) {
+            var searchCol = [newColIndex, curTerms]; // [X,[1,2,3]]
+            currentSearch.push(searchCol);
+            localStorage["currentSearch"] = JSON.stringify(currentSearch);
 
+            var str = curTerms[0];
+            $('#' + curTerms[0]).remove();
+            for (var i = 1; i < curTerms.length; i++) {
+                $('#' + curTerms[i]).remove();
+                str += ", " + curTerms[i];
             }
-        });
-        $button.appendTo('#all_terms');
-        $('#all_terms').show();
-        curTerms = [];
-        $('#get_col').val('');
-        $('#word_num_menu').hide();
+            var $button = $('<button/>', {
+                type: 'button',
+                'class': 'dynBtn',
+                id: str,
+                text: "Searching Col: " + newColIndex + " for " + str,
+                value: "Searching Col: " + newColIndex + " for " + str,
+                click: function () {
+                    app.hideAllNotification();
+                    app.showNotification("Removed the following term from search:'", $(this).attr("value"));
+
+                    //var index = curTerms.indexOf($(this).attr("value"));
+                    //if (index > -1) {
+                    //terms spliced from current search as they are deleted
+                    //    curTerms.splice(index, 1);
+                    //}
+                    $(this).remove();
+
+                }
+            });
+            $button.appendTo('#all_terms');
+            $('#all_terms').show();
+            curTerms = [];
+            $('#get_col').val('');
+            $('#word_num_menu').hide();
+            $('#end_btns').hide();
+            $("#final_btns").show();
+            $("#show_col").hide();
+            $('#add_another').removeAttr('disabled');
+            
+        }
+        else {
+            app.hideAllNotification();
+            app.showNotification("Error:", "You must add at least one search value!");
+        } 
+    }
+
+    function addAnother() {
+        app.hideAllNotification
         $('#col_area').show();
         $('#show_col').contents().remove();
         $("#get_col").show();
         $("#col_submit").show();
+        $('#add_another').attr('disabled', 'disabled');
 
     }
 
-    function loadInputOptions() {
-        if ($('#input_options').length) {
-            var list = document.getElementById('input_options');
-            var options = ["Words and Numbers", "A range of numbers", "Dates", "Value from excel"]
-            for (var i = 0; i < options.length; i++) {
-                var value = document.createElement('option');
-                value.innerHTML = options[i];
-                value.value = options[i];
-                list.appendChild(value);
-            }
-        }
-    }
-
-    function loadInputMenu() {
-        var typeName = $('#input_options option:selected').val();
-        $('#submit_input').show();
-
-        if (typeName == "Words and Numbers") {
-            $("#range_menu").hide();
-            $("#word_num_menu").show();
-        }
-        else if (typeName == "A range of numbers") {
-            $("#word_num_menu").hide();
-            $("#range_menu").show();      
-        }
-    }
-
-   
     /*
     Gets the column to search
     */
@@ -147,6 +132,7 @@
                     text: "You are searching column: " + col.toUpperCase(),
                 });
                 $label.appendTo("#show_col");
+                $("#show_col").show();
                 colAdded = 1;
                 $('#col_area').hide();
                 $('#word_num_menu').show();
@@ -275,15 +261,14 @@
         app.showNotification("Searching for: " + str);
     }
 
-    function addNewSearch() {
-        if (curTerms.length != 0) {
-            var searchCol = [newColIndex, curTerms]; // [X,[1,2,3]]
-            currentSearch.push(searchCol);
-            localStorage["currentSearch"] = JSON.stringify(currentSearch);
-            window.location = "/App/New_Search/NewSearchEndMenu.html";
+    function checkEntry() {
+        if (curTerms.length > 0) {
+            app.hideAllNotification();
+            app.showNotification("Error:", "Please add this entry or delete it before continuing");
+            
         } else {
             app.hideAllNotification();
-            app.showNotification("Error:","You must add at least one search value!" );
+            window.location = "/App/New_Search/NewSearchEndMenu.html";
         }
     }
 
