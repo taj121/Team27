@@ -31,7 +31,7 @@
                 addNewSearch();
             });
             $('#col_submit').click(function () {
-                    colSubmit($('#get_col').val());
+                colSubmit($('#get_col').val());
             })
             $('#detail_toString').click(function () {
                 searchToString();
@@ -39,16 +39,58 @@
             $('#name_submit').click(function () {
                 saveSearch($('#save_name').val());
             })
+            $('#run_again').click(function () {
+                addNewField();
+            })
         });
     };
 
     var newColIndex;
+    var num_cols = 0;
     //stores the current search array of form column-dataToSearchFor column being index 0 of internal array ~Thea
     var currentSearch = [];
     var curTerms = [];
+    var curBts = [];
+    var BtnContainer = [];
     var searchData = [];
     var colAdded = 0; //boolean value to check if the user has entered a column ~Thea
 
+
+    function addNewField() {
+       
+        var str = BtnContainer[0];
+        $(BtnContainer[0]).remove();
+        for (var i = 1; i < BtnContainer.length; i++) {
+            $(BtnContainer[i]).remove();
+            str += ", " + BtnContainer[i];
+        }
+        var $button = $('<button/>', {
+            type: 'button',
+            'class': 'dynBtn',
+            id: str,
+            text: "Searching Col: " + newColIndex + " for " + str,
+            value: "Searching Col: " + newColIndex + " for " + str,
+            click: function () {
+                app.hideAllNotification();
+                app.showNotification("Removed the following term from search:'", $(this).attr("value"));
+
+                //var index = curTerms.indexOf($(this).attr("value"));
+                //if (index > -1) {
+                    //terms spliced from current search as they are deleted
+                //    curTerms.splice(index, 1);
+                //}
+                $(this).remove();
+
+            }
+        });
+        $button.appendTo('#all_terms');
+        $('#all_terms').show();
+        $('#word_num_menu').hide();
+        $('#col_area').show();
+        $('#show_col').contents().remove();
+        $("#get_col").show();
+        $("#col_submit").show();
+    }
 
     function loadInputOptions() {
         if ($('#input_options').length) {
@@ -93,16 +135,19 @@
             newColIndex = convertLettersToNumbers(newColIndex);
             if (newColIndex < searchData.value[0].length) {
                 app.hideAllNotification();
-                $("#get_col").remove();
-                $("#col_submit").remove();
-                $("#select_col").remove();
+                $("#get_col").hide();
+                $("#col_submit").hide();
+                num_cols++;
                 var $label = $('<label/>', {
                     type: 'label',
-                    id: col,
-                    text: "You selected column: " + col.toUpperCase(),
+                    id: String(num_cols),
+                    text: "You are searching column: " + col.toUpperCase(),
                 });
-                $label.appendTo("#col_area");
+                $label.appendTo("#show_col");
                 colAdded = 1;
+                $('#col_area').hide();
+                $('#word_num_menu').show();
+                $('#end_btns').show();
             }
             //Thea -- added a check to make sure that column input is of valid characters
             //i.e. user can't add non-letters. Dan
@@ -111,7 +156,7 @@
                 app.showNotification("Error:", "Column index is not in selected data range.");
             }
         }
-        $('#op_input').show();
+        
     }
 
     //Check if column input is of valid letters
@@ -130,11 +175,13 @@
     //removes the button from the page and the term from the search parameters
     //when the button is clicked. Dan
     function addTerm(term) {
+        
         if (colAdded == 1) {
             if (term != "") { 
                 if (term != -1) {
                     //terms pushed to current search as they are entered
                     curTerms.push(term);
+                    BtnContainer.push(term);
                     app.hideAllNotification();
                     app.showNotification("You are searching for:",curTerms);
                 }
@@ -158,7 +205,7 @@
 
                     }
                 });
-                $button.appendTo('#all_terms');
+                $button.appendTo('#word_num_menu');
                 $('#single_input').val("");
             }
             else {
@@ -172,6 +219,7 @@
     }
 
     function addRange(rbegin, rend) {
+        var rangeContainer = [rbegin, rend] //to hold lo/hi of range
         if (colAdded == 1) {
             if (rbegin != "" && rend != "") {
                 if (rbegin != -1 && rend != -1) {
@@ -179,13 +227,14 @@
                         //terms pushed to current search as they are entered
                         var str = ""
                         for (var i = rbegin; i <= rend; i++) {
-                            curTerms.push(i);
-                            app.hideAllNotification();
                             str += i + ", "
                         }
+                        curTerms.push(rangeContainer);
+                        //i envision this as 1)check if entry is a list 2)if so do an or with the elements in that list
                         var $button = $('<button/>', {
                             type: 'button',
                             'class': 'dynBtn',
+                            id: rbegin + "-" + rend,
                             text: "range: " + rbegin + "-" + rend,
                             value: "range: " + rbegin + "-" + rend,
                             click: function () {
