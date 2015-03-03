@@ -41,6 +41,7 @@
             })
             $('#run_again').click(function () {
                 addNewField();
+                addNewSearch();
             })
         });
     };
@@ -60,7 +61,7 @@
         var str = curTerms[0];
         $('#'+curTerms[0]).remove();
         for (var i = 1; i < curTerms.length; i++) {
-            $(curTerms[i]).remove();
+            $('#' + curTerms[i]).remove();
             str += ", " + curTerms[i];
         }
         var $button = $('<button/>', {
