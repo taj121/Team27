@@ -51,18 +51,17 @@
     var currentSearch = [];
     var curTerms = [];
     var curBts = [];
-    var BtnContainer = [];
     var searchData = [];
     var colAdded = 0; //boolean value to check if the user has entered a column ~Thea
 
 
     function addNewField() {
        
-        var str = BtnContainer[0];
-        $(BtnContainer[0]).remove();
-        for (var i = 1; i < BtnContainer.length; i++) {
-            $(BtnContainer[i]).remove();
-            str += ", " + BtnContainer[i];
+        var str = curTerms[0];
+        $('#'+curTerms[0]).remove();
+        for (var i = 1; i < curTerms.length; i++) {
+            $(curTerms[i]).remove();
+            str += ", " + curTerms[i];
         }
         var $button = $('<button/>', {
             type: 'button',
@@ -85,11 +84,14 @@
         });
         $button.appendTo('#all_terms');
         $('#all_terms').show();
+        curTerms = [];
+        $('#get_col').val('');
         $('#word_num_menu').hide();
         $('#col_area').show();
         $('#show_col').contents().remove();
         $("#get_col").show();
         $("#col_submit").show();
+
     }
 
     function loadInputOptions() {
@@ -181,7 +183,6 @@
                 if (term != -1) {
                     //terms pushed to current search as they are entered
                     curTerms.push(term);
-                    BtnContainer.push(term);
                     app.hideAllNotification();
                     app.showNotification("You are searching for:",curTerms);
                 }
