@@ -52,7 +52,7 @@ h1 {
         
         <div id="word_num_menu" style="display:none">
             <h5>Please enter your search criteria for this column one at a time:</h5>
-            <input type="text" id="single_input" value="Input criteria here" onclick="this.value = ''" onkeydown="if (event.keyCode == 13){ if (this.value != '') { document.getElementById('OK_single_input').click() } }" /> <input type="submit" value="OK" id="OK_single_input" />
+            <input type="text" id="single_input" onkeydown="if (event.keyCode == 13) { if (this.value != '') { document.getElementById('OK_single_input').click() } }" /> <input type="submit" value="OK" id="OK_single_input" />
             <div id="show_col"></div>
             <br />
         </div>

@@ -4,6 +4,7 @@
     // The initialize function must be run each time a new page is loaded
     Office.initialize = function (reason) {
         $(document).ready(function () {
+            $('#get_col').focus()
             app.initialize();
             //will add a new column to search in, initially will have nothing to search for ~Thea
             //$('#get-new-column').click(addNewColumn);
@@ -136,6 +137,7 @@
                 colAdded = 1;
                 $('#col_area').hide();
                 $('#word_num_menu').show();
+                $('#single_input').focus();
                 $('#end_btns').show();
             }
             //Thea -- added a check to make sure that column input is of valid characters
@@ -195,6 +197,7 @@
                 });
                 $button.appendTo('#word_num_menu');
                 $('#single_input').val("");
+                $('#single_input').focus();
             }
             else {
                 app.hideAllNotification();

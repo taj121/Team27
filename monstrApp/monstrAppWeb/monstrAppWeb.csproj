@@ -84,6 +84,7 @@
     <Content Include="App\Saved_Search\Saved_Search_Menu.html" />
     <Content Include="Content\Office.css" />
     <Content Include="Images\Close.png" />
+    <Content Include="Images\redx.jpg" />
     <Content Include="packages.config" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
