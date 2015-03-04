@@ -57,9 +57,9 @@
             localStorage["currentSearch"] = JSON.stringify(currentSearch);
 
             var str = curTerms[0];
-            $('#' + curTerms[0]).remove();
+            $('#' + String(curTerms[0])).remove();
             for (var i = 1; i < curTerms.length; i++) {
-                $('#' + curTerms[i]).remove();
+                $('#' + String(curTerms[i])).remove();
                 str += ", " + curTerms[i];
             }
             var $button = $('<button/>', {
@@ -129,7 +129,7 @@
                 var $label = $('<label/>', {
                     type: 'label',
                     id: String(num_cols),
-                    text: "You are searching column: " + col.toUpperCase(),
+                    text: "Search column " + col.toUpperCase() + " for: ",
                 });
                 $label.appendTo("#show_col");
                 $("#show_col").show();
@@ -177,7 +177,7 @@
                 var $button = $('<button/>', {
                     type: 'button',
                     'class': 'dynBtn',
-                    id: term,
+                    id: String(term),
                     text: term,
                     value: term,
                     click: function () {
@@ -268,7 +268,7 @@
             
         } else {
             app.hideAllNotification();
-            window.location = "/App/New_Search/NewSearchEndMenu.html";
+            window.location = "/App/New_Search/Save_Search.html";
         }
     }
 

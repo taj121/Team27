@@ -31,19 +31,19 @@
         </div>
     </div>
     <div id="content-main" class="padding">
+
         <div id="col_area">
             <h4>Which column would you like to search?</h4>
-            <input type="text" id="get_col" value="Input column letter(s)" onclick ="this.value = ''"onkeydown="if (event.keyCode == 13) {document.getElementById('col_submit').click()}" /> <input type="submit" value="Submit" id="col_submit" />
+            <input type="text" size="2" id="get_col" onkeydown="if (event.keyCode == 13) {document.getElementById('col_submit').click()}" /> <input type="submit" value="Submit" id="col_submit" />
             <br/>
         </div>
 
-        <div id="show_col">
-        </div>
+        
         
         <div id="word_num_menu" style="display:none">
-            <br />
             <h5>Please enter terms one at a time:</h5>
             <input type="text" id="single_input" value="Input term here" onclick="this.value = ''" onkeydown="if (event.keyCode == 13){ if (this.value != '') { document.getElementById('OK_single_input').click() } }" /> <input type="submit" value="OK" id="OK_single_input" />
+            <div id="show_col"></div>
             <br />
         </div>
 

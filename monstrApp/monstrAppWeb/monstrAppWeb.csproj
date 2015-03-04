@@ -71,6 +71,7 @@
     <Content Include="App\Home\Home.css" />
     <Content Include="App\Home\Home.html" />
     <Content Include="App\Home\Home.js" />
+    <Content Include="App\Home\Highlight_cells.gif" />
     <Content Include="App\New_Search\Output.html" />
     <Content Include="App\New_Search\output.js" />
     <Content Include="App\New_Search\View_Search_Details.html" />
@@ -85,13 +86,11 @@
     <Content Include="App\New_Search\Input_Menus\Input_RangeNumbers.html" />
     <Content Include="App\New_Search\Input_Menus\Input_SingleNumber.html" />
     <Content Include="App\New_Search\NewSearch.js" />
-    <Content Include="App\New_Search\NewSearchEndMenu.html" />
     <Content Include="App\New_Search\NewSearchHelp.html" />
     <Content Include="App\New_Search\OpenMenu.html">
       <BrowseToURL>~/App/Home/OpenMenu.html</BrowseToURL>
     </Content>
     <Content Include="App\New_Search\Range_Type_Specification\SelectSearchRange.html" />
-    <Content Include="App\New_Search\Range_Type_Specification\SelectSearchType.html" />
     <Content Include="App\New_Search\Range_Type_Specification\Specification_Help_Pages\Help_SelectSearchRange.html" />
     <Content Include="App\New_Search\Range_Type_Specification\Specification_Help_Pages\Help_SelectSearchType.html" />
     <Content Include="App\New_Search\Save_Search.html" />
