@@ -27,13 +27,14 @@
 <body>
     <div id="content-header">
         <div class="padding">
-            <h2>Add Field - Select Search Range</h2>
+            <h1>Create your search</h1>
         </div>
     </div>
     <div id="content-main" class="padding">
 
         <div id="col_area">
             <h4>Which column would you like to search?</h4>
+            <p>(Enter the letter of the column)</p>
             <input type="text" size="2" id="get_col" onkeydown="if (event.keyCode == 13) {document.getElementById('col_submit').click()}" /> <input type="submit" value="Submit" id="col_submit" />
             <br/>
         </div>
@@ -41,8 +42,8 @@
         
         
         <div id="word_num_menu" style="display:none">
-            <h5>Please enter terms one at a time:</h5>
-            <input type="text" id="single_input" value="Input term here" onclick="this.value = ''" onkeydown="if (event.keyCode == 13){ if (this.value != '') { document.getElementById('OK_single_input').click() } }" /> <input type="submit" value="OK" id="OK_single_input" />
+            <h5>Please enter your search criteria for this column one at a time:</h5>
+            <input type="text" id="single_input" value="Input criteria here" onclick="this.value = ''" onkeydown="if (event.keyCode == 13){ if (this.value != '') { document.getElementById('OK_single_input').click() } }" /> <input type="submit" value="OK" id="OK_single_input" />
             <div id="show_col"></div>
             <br />
         </div>

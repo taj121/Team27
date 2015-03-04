@@ -72,27 +72,13 @@
     <Content Include="App\Home\Home.html" />
     <Content Include="App\Home\Home.js" />
     <Content Include="App\Home\Highlight_cells.gif" />
+    <Content Include="App\New_Search\Bindings.html" />
     <Content Include="App\New_Search\Output.html" />
     <Content Include="App\New_Search\output.js" />
-    <Content Include="App\New_Search\View_Search_Details.html" />
-    <Content Include="App\New_Search\Input_Menus\Input_Help_Pages\Help_MultipleNumberInput.html" />
-    <Content Include="App\New_Search\Input_Menus\Input_Help_Pages\Help_MultipleWordInput.html" />
-    <Content Include="App\New_Search\Input_Menus\Input_Help_Pages\Help_RangeInput.html" />
-    <Content Include="App\New_Search\Input_Menus\Input_Help_Pages\Help_SingleNumberInput.html" />
-    <Content Include="App\New_Search\Input_Menus\Input_Help_Pages\Help_SingleWordInput.html" />
-    <Content Include="App\New_Search\Input_Menus\Input_MultipleWords.html" />
-    <Content Include="App\New_Search\Input_Menus\Input_SingleWord.html" />
-    <Content Include="App\New_Search\Input_Menus\Input_MultipleNumbers.html" />
-    <Content Include="App\New_Search\Input_Menus\Input_RangeNumbers.html" />
-    <Content Include="App\New_Search\Input_Menus\Input_SingleNumber.html" />
     <Content Include="App\New_Search\NewSearch.js" />
     <Content Include="App\New_Search\NewSearchHelp.html" />
-    <Content Include="App\New_Search\OpenMenu.html">
-      <BrowseToURL>~/App/Home/OpenMenu.html</BrowseToURL>
-    </Content>
     <Content Include="App\New_Search\Range_Type_Specification\SelectSearchRange.html" />
     <Content Include="App\New_Search\Range_Type_Specification\Specification_Help_Pages\Help_SelectSearchRange.html" />
-    <Content Include="App\New_Search\Range_Type_Specification\Specification_Help_Pages\Help_SelectSearchType.html" />
     <Content Include="App\New_Search\Save_Search.html" />
     <Content Include="App\Saved_Search\loadSavedSearch.js" />
     <Content Include="App\Saved_Search\Saved_Search_Menu.html" />
