@@ -31,7 +31,8 @@
         <div class="padding">
 
             <p>
-                To begin, please highlight all of the data in your spreadsheet as shown below. Then choose either 'New Search' or 'Saved Search'.
+                To begin, please highlight all of the data in your spreadsheet (starting at cell A1). 
+                Then choose either 'New Search' or 'Saved Search'.
             </p>
 
           
@@ -46,11 +47,14 @@
            
              <input type="submit" value="New Search" id="new-search"><br />
             <!--Takes user to saved search menu-->
-             <input type="submit" value="Saved Search" id="saved-search">
+             <input type="submit" value="Saved Search" id="saved-search"><br />
             <!--Takes user to help menu (I am assuming we will create DIFFERENT help menus for each page
         that cater specifically to what is on each page but I will bring this up at the next mtg)-->
-            <p>Highlighting data:</p>
-            <img src="../Home/Highlight_cells.gif" alt="Gif not loaded" style="width:235px;height:200px">
+            <br />
+            <p>You can view our short step by step tutorial here:</p>
+            <form action="../Tutorial/Tutorial_Page.html">
+                <input type="submit" value="Begin tutorial">
+            </form>
         </div>
     </div>
 </body>
