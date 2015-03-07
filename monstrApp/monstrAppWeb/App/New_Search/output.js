@@ -40,7 +40,7 @@
             }
             data = newData;
         }
-        printToWindow(toString(data));
+        //printToWindow(toString(data));
         return data;
     }
     /*
