@@ -271,7 +271,7 @@
             
         } else {
             app.hideAllNotification();
-            window.location = "/App/New_Search/Save_Search.html";
+            window.location = "/App/New_Search/Bindings.html";
         }
     }
 
@@ -409,6 +409,8 @@
                     app.showNotification('Settings save failed. Error: ' + asyncResult.error.message);
                 } else {
                     app.showNotification('Settings saved.');
+
+                    window.location = "/App/Home/Home.html";
                 }
             });
         }

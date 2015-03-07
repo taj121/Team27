@@ -31,13 +31,11 @@
             <div style="text-align:center">
                 <!--this is just a rough version to allow me to test saving, this box should probably only appear if they already said they 
                     wanted to save the search...-->
-                <input type="text" id="save_name" value="enter search name"/><input type="submit" value="Save" id="name_submit" />
+                <input type="text" id="save_name" placeholder="Enter Search Name" onkeydown="if (event.keyCode == 13) { if (this.value != '') { document.getElementById('name_submit').click() } }" />
+                <input type="submit" value="Save" id="name_submit"/>
                 <br />
-                <form action="../New_Search/Bindings.html">
-                    <input type="submit" value="Continue" >
-                </form>
                 <form action="../Home/Home.html">
-                    <input type="submit" value="Cancel">
+                    <input type="submit" value="Back To Home">
                 </form>
             </div>
     </div>
