@@ -41,6 +41,7 @@
     };
 
     var newColIndex;
+    var newColLetter;
     var num_cols = 0;
     //stores the current search array of form column-dataToSearchFor column being index 0 of internal array ~Thea
     var currentSearch = [];
@@ -67,18 +68,18 @@
                 type: 'button',
                 'class': 'dynBtn',
                 id: str,
-                text: "Searching Col: " + newColIndex + " for " + str,
-                value: "Searching Col: " + newColIndex + " for " + str,
+                text: "Searching Col: " + newColLetter + " for " + str,
+                value: "Searching Col: " + newColLetter + " for " + str,
                 click: function () {
                     app.hideAllNotification();
-                    app.showNotification("Removed the following term from search:'", $(this).attr("value"));
+                    app.showNotification("Working on deleting backend");
 
                     //var index = curTerms.indexOf($(this).attr("value"));
                     //if (index > -1) {
                     //terms spliced from current search as they are deleted
                     //    curTerms.splice(index, 1);
                     //}
-                    $(this).remove();
+                    //$(this).remove();
 
                 }
             });
@@ -114,6 +115,7 @@
     */
     function colSubmit(col) {
         newColIndex = $('#get_col').val();
+        newColLetter = $('#get_col').val().toUpperCase();
         if (newColIndex == "") {
             app.hideAllNotification();
             app.showNotification("Error:", "No Column Selected");
