@@ -37,18 +37,45 @@
     display: none; /* Hidden until invoked */
 }
 
-    #notification-message #notification-message-header {
-        font-size: medium;
-        margin-bottom: 10px;
-    }
+#notification-message #notification-message-header {
+    font-size: medium;
+    margin-bottom: 10px;
+}
 
-    #notification-message #notification-message-close {
-        background-image: url("../Images/Close.png");
-        background-repeat: no-repeat;
-        width: 24px;
-        height: 24px;
-        position: absolute;
-        right: 5px;
-        top: 5px;
-        cursor: pointer;
-    }
+#notification-message #notification-message-close {
+    background-image: url("../Images/Close.png");
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+}
+
+input[type=submit] {
+    background: #3498db;
+    background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+    background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+    background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+    background-image: -o-linear-gradient(top, #3498db, #2980b9);
+    background-image: linear-gradient(to bottom, #3498db, #2980b9);
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: small;
+    /*padding: 10px 20px 10px 20px;*/
+    text-decoration: none;
+    /*width: 110px;*/
+    height: 30px;
+    position: center;
+}
+
+body { text-align: center; }
+
+input[type=text] {  
+  width : 150px;
+  margin: 0;
+}
