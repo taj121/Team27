@@ -174,7 +174,7 @@
                 if (term != -1) {
                     //terms pushed to current search as they are entered
                     curTerms.push(term);
-                    //app.hideAllNotification();
+                    app.hideAllNotification();
                     //app.showNotification("You are searching for:",curTerms);
                 }
                 //create button dynamically based on term entry
