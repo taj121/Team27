@@ -4,9 +4,21 @@
     Office.initialize = function (reason) {
         $(document).ready(function () {
             app.initialize();
-            $('#results-to-new-sheet').click(resultsToNewSheet);
+            $('#select_column').click(function () {
+                selectColumn();
+            });
+            $('#results-to-new-sheet').click(function () {
+                resultsToNewSheet();
+            });
+            $('#output_sheet_submit').click(function () {
+                if (submitSheet($('#output_sheet_value').val())) {
+                    resultsToNewSheet();
+                }
+            });
         });
     };
+
+    
 
     var searchResults = getResults();
     searchResults = convertTwoDimToOneDim(searchResults);
@@ -14,6 +26,17 @@
     searchResults = convertOneDimToTwoDim(searchResults);
     var bindingArea = "Sheet2!A1:A" + arraySize; // storing in just one column 'A', on 'Sheet2'
 
+    function submitSheet(sheet) {
+        if (arraySize == 0) {
+            app.showNotification("Error:", "No entries satisfy the search parameters");
+            return false;
+        }
+        else if (sheet == "" || sheet = "New spreadsheet name") {
+            app.showNotification("Error:", "Please enter a sheet name");
+            return false;
+        }
+        return true;
+    }
 
     /*
     *   Function to display results on a new sheet / specified range within current sheet.
@@ -23,15 +46,17 @@
     function resultsToNewSheet(elementId) {
         Office.context.document.bindings.addFromNamedItemAsync(bindingArea, Office.BindingType.Matrix, { id: "NewBinding" }, function (asyncResult) {
             if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                app.showNotification("Error : create a new sheet.");
+                app.showNotification("Error:", "Please make sure you have created a new sheet and entered the right sheet name (caps-sensitive)");
             }
             else {
+                app.hideAllNotification();
                 app.showNotification('Displaying your search results.');
                 Office.select("bindings#NewBinding").setDataAsync(searchResults,
                     {
                         coercionType: "matrix"
                     }, function (asyncResult) {
                         if (asyncResult.status == "failed") {
+                            app.hideAllNotification();
                             app.showNotification('Error: ' + asyncResult.error.message);
                         }
                     });

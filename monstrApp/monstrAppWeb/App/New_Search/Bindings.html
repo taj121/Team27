@@ -17,7 +17,7 @@
     <script src="/App/App.js" type="text/javascript"></script>
 
     <link href="/App/Home/Home.css" rel="stylesheet" type="text/css" />
-    <script src="/App/New_Search/NewSearch.js" type="text/javascript"></script>
+    <script src="/App/New_Search/output.js" type="text/javascript"></script>
 </head>
 <body>
     <div id="content-header">
@@ -33,11 +33,9 @@
 
         <div style="text-align:center">
             <br />
-            <input type="text" id="" value="New spreadsheet name" /><input type="submit" value="Confirm" id="" />
+            <input type="text" id="output_sheet_value" value="New spreadsheet name" onclick="this.value=''"/>
+            <input type="submit" value="Confirm" id="output_sheet_submit" />
             <br />
-            <form action="../New_Search/Output.html">
-                <input type="submit" value="Run Search">
-            </form>
             <form action="../Home/Home.html">
                 <input type="submit" value="Cancel">
             </form>

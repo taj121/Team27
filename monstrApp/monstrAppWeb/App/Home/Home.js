@@ -9,12 +9,13 @@
     Office.initialize = function (reason) {
         $(document).ready(function () {
             app.initialize();
-            if (!(document.cookie)) {
-                document.cookie = "FirstTime=true";
-                window.location = "/App/Tutorial/Tutorial_Page.html"
-                var myWindow = window.open("", "MsgWindow", "width=500, height=500");
-                myWindow.document.write("<pre>" + "Welcome first time user!" + "</pre>");
-            }
+            //this is the cookie stuff but it gets really annoying so I'll put it back later. Dan
+            //if (!(document.cookie)) {
+            //    document.cookie = "FirstTime=true";
+            //    window.location = "/App/Tutorial/Tutorial_Page.html"
+            //    var myWindow = window.open("", "MsgWindow", "width=500, height=500");
+            //    myWindow.document.write("<pre>" + "Welcome first time user!" + "</pre>");
+            //}
             bindButton();
             checkIfSavedSearches();
         });        
