@@ -80,6 +80,6 @@ input[type=submit] {
 body { text-align: center; }
 
 input[type=text] {  
-  width : 150px;
+  /*width : 150px;*/
   margin: 0;
 }
