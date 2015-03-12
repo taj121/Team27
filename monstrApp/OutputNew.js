@@ -4,15 +4,63 @@
     Office.initialize = function (reason) {
         $(document).ready(function () {
             app.initialize();
-            $('#results-to-new-sheet').click(resultsToNewSheet);
+            $('#select_column').click(function () {
+                selectColumn();
+            });
+            $('#results-to-new-sheet').click(function () {
+                resultsToNewSheet();
+            });
+            $('#output_sheet_submit').click(function () {
+                if (submitSheet($('#output_sheet_value').val())) {
+                    resultsToNewSheetIterate();
+                }
+            });
         });
     };
 
     var searchResults = getResults();
-    searchResults = convertTwoDimToOneDim(searchResults);
+    var tempInnerResult = [];
+    var tempResult = [];
+    var innerResultArraySize = 0;
+    var startColumnAuto = 0;
+    var startRowAuto = 0;
+    var bindingArea = "Sheet2!A1:";
     var arraySize = searchResults.length;
-    searchResults = convertOneDimToTwoDim(searchResults);
-    var bindingArea = "Sheet2!A1:A" + arraySize; // storing in just one column 'A', on 'Sheet2'
+    var increment = 0;
+
+
+    function submitSheet(sheet) {
+        if (arraySize == 0) {
+            app.showNotification("Error:", "No entries satisfy the search parameters");
+            return false;
+        }
+        else if (sheet == "" || sheet == "New spreadsheet name") {
+            app.showNotification("Error:", "Please enter a sheet name");
+            return false;
+        }
+        return true;
+    }
+
+
+    function resultsToNewSheetIterate() {
+        for (var i = 0; i < arraySize; i++) {
+            tempInnerResult = searchResults[i];
+            innerResultArraySize = tempInnerResult.length;
+            for (var j = 0; j < innerResultArraySize; j++) {
+                //console.log('innerArraySize ' + innerResultArraySize);
+                //console.log('innerArray[i] ' + tempInnerResult[i]);
+                increment = j + 1;
+                bindingArea = "Sheet2!A1:";
+                startRowAuto = i;
+                startColumnAuto = j;
+                bindingArea += convertNumberToLetter(j) + increment;
+                console.log("computedBindingArea " + bindingArea);
+                tempResult = tempInnerResult[j];
+                //console.log('typeof ' + typeof (tempResult));
+                resultsToNewSheet();
+            }
+        }
+    }
 
 
     /*
@@ -27,9 +75,12 @@
             }
             else {
                 app.showNotification('Displaying your search results.');
-                Office.select("bindings#NewBinding").setDataAsync(searchResults,
+                console.log('tempResult ' + tempResult);
+                Office.select("bindings#NewBinding").setDataAsync(tempResult,
                     {
-                        coercionType: "matrix"
+                        coercionType: "matrix",
+                        startColumn: startColumnAuto,
+                        startRow: startRowAuto,
                     }, function (asyncResult) {
                         if (asyncResult.status == "failed") {
                             app.showNotification('Error: ' + asyncResult.error.message);
@@ -61,8 +112,6 @@
                 if (data.value != undefined) {
                     for (var j = 0; j < data.value.length; j++) {
                         if (j == rowsToGet[k]) {
-                            //newData.push(data.value[j]);
-                            // remove commas when adding terms nigel
                             newData.push(deleteArrayCommas(data.value[j]));
                         }
                     }
@@ -75,7 +124,6 @@
                     }
                 }
             }
-
             data = newData;
         }
         return data;
@@ -95,8 +143,7 @@
                     if (typeof currentCheck != "string") {
                         currentCheck = String(currentCheck);
                     }
-                    // added this for when item contained in comma 
-                    // separated cell with other words/numbers. nigel
+                    // added for items separated by commas in cell, nigel
                     if (containsCommas(currentCheck)) {
                         var array = currentCheck.split(',');
                         if (containsElementSeparatedByCommas(array, toFind[j])) {
@@ -122,15 +169,6 @@
     }
 
     /*
-     *  Convert user input target sheet to correct binding range.
-     *  For now this is still going down column A, needs to be linked to bindingArea variable. nigel
-     */
-    function convertInputToValidRange(inputSheet) {
-        var bindingTarget = inputSheet + "!A1:A";
-        return bindingTarget;
-    }
-
-    /*
     *   Convert numbers to column letters - nigel
     */
     function convertNumberToLetter(number) {
@@ -145,7 +183,7 @@
     }
 
     /*   
-     *  Check for element in array. nigel
+     *  Function to check for element in array. nigel
      */
     function containsElementSeparatedByCommas(array, element) {
         for (var i = 0; i < array.length; i++) {
@@ -158,7 +196,7 @@
     }
 
     /*
-     *   Check if a string contains commas. nigel
+     *   Function to check if a string contains commas. nigel
      */
     function containsCommas(string) {
         for (var i = 0; i < string.length; i++) {
@@ -169,6 +207,14 @@
         return false;
     }
 
+
+    /*
+     *  Convert user input target sheet to correct binding range. nigel
+     */
+    function convertInputToValidRange(inputSheet) {
+        var bindingTarget = inputSheet + "!A1:A";
+        return bindingTarget;
+    }
 
     /*
     *   Converts 1d to 2d
@@ -182,7 +228,7 @@
     }
 
     /*
-    *   convert 2d array to 1d. nigel
+    *   Function that converts 2d array to 1d. nigel
     */
     function convertTwoDimToOneDim(array) {
         var oneDimArray = [];
@@ -192,7 +238,7 @@
 
 
     /*
-    *   Delete extra commas from 
+    *   Function to delete extra commas from 
     *   previous empty cells in row. nigel
     */
     function deleteArrayCommas(array) {
