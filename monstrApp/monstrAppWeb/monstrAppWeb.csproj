@@ -72,6 +72,7 @@
     <Content Include="App\Home\Home.css" />
     <Content Include="App\Home\Home.html" />
     <Content Include="App\Home\Home.js" />
+    <Content Include="App\New_Search\Oops.html" />
     <Content Include="App\New_Search\OutputNew.js" />
     <Content Include="App\Tutorial\Help_Images\Example sheet.png" />
     <Content Include="App\Tutorial\Help_Images\Highlight_cells.gif" />

@@ -4,6 +4,7 @@
     Office.initialize = function (reason) {
         $(document).ready(function () {
             app.initialize();
+            
             $('#select_column').click(function () {
                 selectColumn();
             });
@@ -19,12 +20,13 @@
     };
 
     
-
-    var searchResults = getResults();
+    var temp = localStorage["data"];
+    var searchResults = JSON.parse(temp);
     searchResults = convertTwoDimToOneDim(searchResults);
     var arraySize = searchResults.length;
     searchResults = convertOneDimToTwoDim(searchResults);
-    var bindingArea = "Sheet2!A1:A" + arraySize; // storing in just one column 'A', on 'Sheet2'
+    bindingArea = "Sheet2!A1:A" + arraySize; // storing in just one column 'A', on 'Sheet2'
+
 
     function submitSheet(sheet) {
         if (arraySize == 0) {
