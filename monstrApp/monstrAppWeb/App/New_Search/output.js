@@ -45,11 +45,11 @@
     function resultsToNewSheet(elementId) {
         Office.context.document.bindings.addFromNamedItemAsync(bindingArea, Office.BindingType.Matrix, { id: "NewBinding" }, function (asyncResult) {
             if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                app.showNotification("Error:", "Please make sure you have created a new sheet and entered the right sheet name (caps-sensitive)");
+                app.showNotification("Error:", "Please make sure you have:\n1) Created a new sheet\n2) Entered the right sheet name (caps-sensitive)");
             }
             else {
                 app.hideAllNotification();
-                app.showNotification('Displaying your search results.');
+                app.showNotification("Success!", "Displaying your search results");
                 Office.select("bindings#NewBinding").setDataAsync(searchResults,
                     {
                         coercionType: "matrix"
@@ -68,42 +68,7 @@
     function gets rows to return. 
     ~Thea
     */
-    function getResults() {
-        var data = JSON.parse(localStorage["userDataSelection"]);
-        console.log('data getResults() ' + data);
-        var temp = localStorage["currentSearch"];
-        var searchFor = JSON.parse(temp);
-        var newData = [];
-
-        for (var i = 0; i < searchFor.length; i++) {
-            var column = searchFor[i][0];
-            var toFind = searchFor[i][1];
-            console.log('toFind ' + toFind);
-            var rowsToGet = findIndex(toFind, column, data);
-            for (var k = 0; k < rowsToGet.length; k++) {
-                console.log('data.value before ' + data.value);
-                if (data.value != undefined) {
-                    for (var j = 0; j < data.value.length; j++) {
-                        if (j == rowsToGet[k]) {
-                            //newData.push(data.value[j]);
-                            // remove commas when adding terms nigel
-                            newData.push(deleteArrayCommas(data.value[j]));
-                        }
-                    }
-                }
-                else {
-                    for (var j = 0; j < data.length; j++) {
-                        if (j == rowsToGet[k]) {
-                            newData.push(data[j]);
-                        }
-                    }
-                }
-            }
-
-            data = newData;
-        }
-        return data;
-    }
+    
 
 
     /*

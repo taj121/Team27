@@ -197,18 +197,6 @@
                 id: str,
                 text: "Searching Col: " + newColLetter + " for " + str,
                 value: "Searching Col: " + newColLetter + " for " + str,
-                click: function () {
-                    app.hideAllNotification();
-                    app.showNotification("Working on deleting backend");
-
-                    //var index = curTerms.indexOf($(this).attr("value"));
-                    //if (index > -1) {
-                    //terms spliced from current search as they are deleted
-                    //    curTerms.splice(index, 1);
-                    //}
-                    //$(this).remove();
-
-                }
             });
             $button.appendTo('#all_terms');
             $('#all_terms').show();
