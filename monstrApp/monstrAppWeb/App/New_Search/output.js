@@ -31,7 +31,7 @@
             app.showNotification("Error:", "No entries satisfy the search parameters");
             return false;
         }
-        else if (sheet == "" || sheet = "New spreadsheet name") {
+        else if (sheet == "" || sheet == "New spreadsheet name") {
             app.showNotification("Error:", "Please enter a sheet name");
             return false;
         }
