@@ -90,8 +90,9 @@
             window.location = "/App/New_Search/Oops.html"
         }
         else {
-            localStorage["data"] = data;
+            localStorage["data"] = JSON.stringify(data);
             window.location = "/App/New_Search/Bindings.html"
+
         }
     }
 
@@ -145,6 +146,23 @@
             }
         }
         return false;
+    }
+
+    /*
+    *   Delete extra commas from 
+    *   previous empty cells in row. nigel
+    */
+    function deleteArrayCommas(array) {
+        var newArray = [];
+        for (var i = 0; i < array.length; i++) {
+            console.log('array[i] ' + array[i]);
+            if (array[i] != "") {
+                //console.log('array[i][j] ' + array[i]);
+                newArray.push(array[i]);
+            }
+        }
+        console.log('newArray ' + newArray);
+        return newArray;
     }
 
     /*   

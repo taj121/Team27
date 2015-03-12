@@ -18,14 +18,11 @@
             });
         });
     };
-
-    
-    var temp = localStorage["data"];
-    var searchResults = JSON.parse(temp);
+    var searchResults = JSON.parse(localStorage["data"]);
     searchResults = convertTwoDimToOneDim(searchResults);
     var arraySize = searchResults.length;
     searchResults = convertOneDimToTwoDim(searchResults);
-    bindingArea = "Sheet2!A1:A" + arraySize; // storing in just one column 'A', on 'Sheet2'
+    var bindingArea = "Sheet2!A1:A" + arraySize; // storing in just one column 'A', on 'Sheet2'
 
 
     function submitSheet(sheet) {
