@@ -19,10 +19,11 @@
         });
     };
     var searchResults = JSON.parse(localStorage["data"]);
-    searchResults = convertTwoDimToOneDim(searchResults);
+    //searchResults = convertTwoDimToOneDim(searchResults);
     var arraySize = searchResults.length;
-    searchResults = convertOneDimToTwoDim(searchResults);
+    //searchResults = convertOneDimToTwoDim(searchResults);
     var bindingArea; // storing in just one column 'A', on 'Sheet2'
+    var letter = convertSizetoLetter();
 
 
     function submitSheet(sheet) {
@@ -34,8 +35,17 @@
             app.showNotification("Error:", "Please enter a sheet name");
             return false;
         }
-        bindingArea = sheet + "!A1:A" + arraySize
+        bindingArea = sheet + "!A1:" + letter + arraySize
         return true;
+    }
+
+    function convertSizetoLetter() {
+        Debug.writeln(searchResults);
+        var idx = searchResults[0].length;
+        var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        console.log(searchResults);
+        console.log(alphabet.charAt(idx - 1));
+        return alphabet.charAt(idx - 1);
     }
 
     /*
@@ -57,7 +67,7 @@
                     }, function (asyncResult) {
                         if (asyncResult.status == "failed") {
                             app.hideAllNotification();
-                            app.showNotification('Error: ' + asyncResult.error.message);
+                            app.showNotification('Error: ', asyncResult.error.message);
                         }
                     });
                 window.location = "/App/New_Search/Save_Search.html"
@@ -73,45 +83,6 @@
     */
     
 
-
-    /*
-    Function to find the index of an array of serch parameters passed in. In a specific column
-    ~Thea
-    */
-    function findIndex(toFind, col, result) {
-        var foundAt = [];
-        if (result.value != undefined) {
-            for (var i = 0; i < result.value.length; i++) {
-                for (var j = 0; j < toFind.length; j++) {
-                    var currentCheck = result.value[i][col];
-                    if (typeof currentCheck != "string") {
-                        currentCheck = String(currentCheck);
-                    }
-                    // added this for when item contained in comma 
-                    // separated cell with other words/numbers. nigel
-                    if (containsCommas(currentCheck)) {
-                        var array = currentCheck.split(',');
-                        if (containsElementSeparatedByCommas(array, toFind[j])) {
-                            foundAt.push(i);
-                        }
-                    }
-                    else if (toFind[j].toUpperCase().replace(/\s+/g, '') == currentCheck.toUpperCase().replace(/\s+/g, '')) {
-                        foundAt.push(i);
-                    }
-                }
-            }
-        }
-        else {
-            for (var i = 0; i < result.length; i++) {
-                for (var j = 0; j < toFind.length; j++) {
-                    if (toFind[j] == result[i][col]) {
-                        foundAt.push(i);
-                    }
-                }
-            }
-        }
-        return foundAt;
-    }
 
     /*
      *  Convert user input target sheet to correct binding range.
@@ -136,30 +107,8 @@
         return columnName;
     }
 
-    /*   
-     *  Check for element in array. nigel
-     */
-    function containsElementSeparatedByCommas(array, element) {
-        for (var i = 0; i < array.length; i++) {
-            if (array[i].toUpperCase().replace(/\s+/g, '') == element.toUpperCase().replace(/\s+/g, '')) {
-                console.log('true match');
-                return true;
-            }
-        }
-        return false;
-    }
 
-    /*
-     *   Check if a string contains commas. nigel
-     */
-    function containsCommas(string) {
-        for (var i = 0; i < string.length; i++) {
-            if (string[i] == ',') {
-                return true;
-            }
-        }
-        return false;
-    }
+
 
 
     /*
@@ -187,18 +136,6 @@
     *   Delete extra commas from 
     *   previous empty cells in row. nigel
     */
-    function deleteArrayCommas(array) {
-        var newArray = [];
-        for (var i = 0; i < array.length; i++) {
-            console.log('array[i] ' + array[i]);
-            if (array[i] != "") {
-                //console.log('array[i][j] ' + array[i]);
-                newArray.push(array[i]);
-            }
-        }
-        console.log('newArray ' + newArray);
-        return newArray;
-    }
 
 })();
 
