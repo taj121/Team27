@@ -4,12 +4,6 @@
     Office.initialize = function (reason) {
         $(document).ready(function () {
             app.initialize();
-            $('#select_column').click(function () {
-                selectColumn();
-            });
-            $('#results-to-new-sheet').click(function () {
-                resultsToNewSheet();
-            });
             $('#output_sheet_submit').click(function () {
                 if (submitSheet($('#output_sheet_value').val())) {
                     resultsToNewSheetIterate();
@@ -26,7 +20,73 @@
     var startRowAuto = 0;
     var bindingArea = "Sheet2!A1:";
     var arraySize = searchResults.length;
-    var increment = 0;
+    var jIncrement = 0;
+    var iIncrement = 0;
+    var functionCheck = 0;
+    var iterateCheck = 0;
+
+
+    function resultsToNewSheetIterate() {
+        for (var i = 0; i < arraySize; i++) {
+            tempInnerResult = searchResults[i];
+            innerResultArraySize = tempInnerResult.length;
+            functionCheck = 0;
+            //console.log('tempInnerResult just before loop ' + tempInnerResult);
+            //console.log('functionCheck outside loop ' + functionCheck);
+            for (var j = 0; j < innerResultArraySize; j++) {
+                console.log('functionCheck loop after function ' + functionCheck);
+                functionCheck = 0;
+                while (functionCheck <= 1) {
+                    //console.log('tempResult in iterate ' + tempResult);
+                    //console.log('innerArraySize ' + innerResultArraySize);
+                    //console.log('innerArray[i] ' + tempInnerResult[j]);
+                    iIncrement = i + 1;
+                    jIncrement = j + 1;
+                    bindingArea = "Sheet2!A" + iIncrement + ":";
+                    startRowAuto = i;
+                    startColumnAuto = j;
+                    bindingArea += convertNumberToLetter(innerResultArraySize) + 1;
+                    //console.log("computedBindingArea " + bindingArea);
+                    tempResult = tempInnerResult[j];
+                    //console.log('functionCheck inside loop ' + functionCheck);
+                    resultsToNewSheet();
+                }
+            }
+        }
+    }
+
+
+    /*
+    *   Function to display results on a new sheet / specified range within current sheet.
+    *   Creates a binding with the search results and binding range passed. 
+    *   'bindingArea' specifies the sheet and range, 'searchResults' the filtered results. - nigel
+    */
+    function resultsToNewSheet() {
+        Office.context.document.bindings.addFromNamedItemAsync(bindingArea, Office.BindingType.Matrix, { id: "NewBinding" }, function (asyncResult) {
+            if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+                app.showNotification("Error", "Please make sure you have created a new sheet and entered the right sheet name (caps-sensitive)");
+            }
+            else {
+                //app.showNotification('Displaying your search results.');
+                console.log('tempResult ' + tempResult);
+                console.log('startColInside ' + startColumnAuto);
+                console.log('startRowInside ' + startRowAuto);
+
+                functionCheck++;
+                console.log('functionCheck inside function ' + functionCheck);
+                Office.select("bindings#NewBinding").setDataAsync(tempResult,
+                {
+                    coercionType: "matrix",
+                    startColumn: startColumnAuto,
+                    startRow: startRowAuto,
+                }, function (asyncResult) {
+                    if (asyncResult.status == "failed") {
+                        //app.showNotification('Error: ' + asyncResult.error.message);
+                    }
+                });
+            }
+        })
+    };
 
 
     function submitSheet(sheet) {
@@ -40,56 +100,6 @@
         }
         return true;
     }
-
-
-    function resultsToNewSheetIterate() {
-        for (var i = 0; i < arraySize; i++) {
-            tempInnerResult = searchResults[i];
-            innerResultArraySize = tempInnerResult.length;
-            for (var j = 0; j < innerResultArraySize; j++) {
-                //console.log('innerArraySize ' + innerResultArraySize);
-                //console.log('innerArray[i] ' + tempInnerResult[i]);
-                increment = j + 1;
-                bindingArea = "Sheet2!A1:";
-                startRowAuto = i;
-                startColumnAuto = j;
-                bindingArea += convertNumberToLetter(j) + increment;
-                console.log("computedBindingArea " + bindingArea);
-                tempResult = tempInnerResult[j];
-                //console.log('typeof ' + typeof (tempResult));
-                resultsToNewSheet();
-            }
-        }
-    }
-
-
-    /*
-    *   Function to display results on a new sheet / specified range within current sheet.
-    *   Creates a binding with the search results and binding range passed. 
-    *   'bindingArea' specifies the sheet and range, 'searchResults' the filtered results. - nigel
-    */
-    function resultsToNewSheet(elementId) {
-        Office.context.document.bindings.addFromNamedItemAsync(bindingArea, Office.BindingType.Matrix, { id: "NewBinding" }, function (asyncResult) {
-            if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                app.showNotification("Error : create a new sheet.");
-            }
-            else {
-                app.showNotification('Displaying your search results.');
-                console.log('tempResult ' + tempResult);
-                Office.select("bindings#NewBinding").setDataAsync(tempResult,
-                    {
-                        coercionType: "matrix",
-                        startColumn: startColumnAuto,
-                        startRow: startRowAuto,
-                    }, function (asyncResult) {
-                        if (asyncResult.status == "failed") {
-                            app.showNotification('Error: ' + asyncResult.error.message);
-                        }
-                    });
-            }
-        })
-    };
-
 
     /*
     function gets rows to return. 
@@ -112,7 +122,8 @@
                 if (data.value != undefined) {
                     for (var j = 0; j < data.value.length; j++) {
                         if (j == rowsToGet[k]) {
-                            newData.push(deleteArrayCommas(data.value[j]));
+                            //newData.push(deleteArrayCommas(data.value[j]));
+                            newData.push(data.value[j]);
                         }
                     }
                 }
@@ -182,37 +193,11 @@
         return columnName;
     }
 
-    /*   
-     *  Function to check for element in array. nigel
-     */
-    function containsElementSeparatedByCommas(array, element) {
-        for (var i = 0; i < array.length; i++) {
-            if (array[i].toUpperCase().replace(/\s+/g, '') == element.toUpperCase().replace(/\s+/g, '')) {
-                console.log('true match');
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /*
-     *   Function to check if a string contains commas. nigel
-     */
-    function containsCommas(string) {
-        for (var i = 0; i < string.length; i++) {
-            if (string[i] == ',') {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
     /*
      *  Convert user input target sheet to correct binding range. nigel
      */
     function convertInputToValidRange(inputSheet) {
-        var bindingTarget = inputSheet + "!A1:A";
+        var bindingTarget = inputSheet + "!A1:";
         return bindingTarget;
     }
 
@@ -238,6 +223,18 @@
 
 
     /*
+    *  Check if a string contains commas. nigel
+    */
+    function containsCommas(string) {
+        for (var i = 0; i < string.length; i++) {
+            if (string[i] == ',') {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*
     *   Function to delete extra commas from 
     *   previous empty cells in row. nigel
     */
@@ -246,7 +243,7 @@
         for (var i = 0; i < array.length; i++) {
             console.log('array[i] ' + array[i]);
             if (array[i] != "") {
-                //console.log('array[i][j] ' + array[i]);
+                //console.log('array[i] ' + array[i]);
                 newArray.push(array[i]);
             }
         }
@@ -254,4 +251,20 @@
         return newArray;
     }
 
+
+    /*   
+    *  Check for element in array. nigel
+    */
+    function containsElementSeparatedByCommas(array, element) {
+        for (var i = 0; i < array.length; i++) {
+            if (array[i].toUpperCase().replace(/\s+/g, '') == element.toUpperCase().replace(/\s+/g, '')) {
+                //console.log('match');
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 })();
+
