@@ -207,6 +207,7 @@
             $("#final_btns").show();
             $("#show_col").hide();
             $('#add_another').removeAttr('disabled');
+            $('#get_col').focus();
             
         }
         else {
