@@ -161,7 +161,6 @@
                 newArray.push(array[i]);
             }
         }
-        console.log('newArray ' + newArray);
         return newArray;
     }
 
