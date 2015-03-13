@@ -22,7 +22,7 @@
     searchResults = convertTwoDimToOneDim(searchResults);
     var arraySize = searchResults.length;
     searchResults = convertOneDimToTwoDim(searchResults);
-    var bindingArea = "Sheet2!A1:A" + arraySize; // storing in just one column 'A', on 'Sheet2'
+    var bindingArea; // storing in just one column 'A', on 'Sheet2'
 
 
     function submitSheet(sheet) {
@@ -34,6 +34,7 @@
             app.showNotification("Error:", "Please enter a sheet name");
             return false;
         }
+        bindingArea = sheet + "!A1:A" + arraySize
         return true;
     }
 
@@ -45,7 +46,7 @@
     function resultsToNewSheet(elementId) {
         Office.context.document.bindings.addFromNamedItemAsync(bindingArea, Office.BindingType.Matrix, { id: "NewBinding" }, function (asyncResult) {
             if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                app.showNotification("Error:", "Please make sure you have:\n1) Created a new sheet\n2) Entered the right sheet name (caps-sensitive)");
+                app.showNotification("Error:", "Please make sure you have: 1) Created a new sheet and 2) Entered the right sheet name (caps-sensitive)");
             }
             else {
                 app.hideAllNotification();
@@ -60,6 +61,7 @@
                         }
                     });
                 window.location = "/App/New_Search/Save_Search.html"
+               
             }
         })
     };
