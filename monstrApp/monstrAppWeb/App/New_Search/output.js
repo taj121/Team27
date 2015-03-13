@@ -59,6 +59,7 @@
                             app.showNotification('Error: ' + asyncResult.error.message);
                         }
                     });
+                window.location = "/App/New_Search/Save_Search.html"
             }
         })
     };
