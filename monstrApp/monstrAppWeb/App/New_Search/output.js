@@ -19,10 +19,9 @@
         });
     };
     var searchResults = JSON.parse(localStorage["data"]);
-    searchResults = convertTwoDimToOneDim(searchResults);
     var arraySize = searchResults.length;
-    searchResults = convertOneDimToTwoDim(searchResults);
-    var bindingArea = "Sheet2!A1:A" + arraySize; // storing in just one column 'A', on 'Sheet2'
+    var bindingArea; // storing in just one column 'A', on 'Sheet2'
+    var letter = convertSizetoLetter(searchResults[0].length);
 
 
     function submitSheet(sheet) {
@@ -34,7 +33,19 @@
             app.showNotification("Error:", "Please enter a sheet name");
             return false;
         }
+        bindingArea = sheet + "!A1:" + letter + arraySize
         return true;
+    }
+
+    function convertSizetoLetter(idx) {
+        var sb = "";
+        var num = idx - 1;
+        while (num >=  0) {
+            var numChar = (num % 26)  + 65;
+            sb += String.fromCharCode(numChar);
+            num = (num  / 26) - 1;
+        }
+        return sb.split("").reverse().join("");
     }
 
     /*
@@ -45,7 +56,7 @@
     function resultsToNewSheet(elementId) {
         Office.context.document.bindings.addFromNamedItemAsync(bindingArea, Office.BindingType.Matrix, { id: "NewBinding" }, function (asyncResult) {
             if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                app.showNotification("Error:", "Please make sure you have:\n1) Created a new sheet\n2) Entered the right sheet name (caps-sensitive)");
+                app.showNotification("Error:", "Please make sure you have: 1) Created a new sheet and 2) Entered the right sheet name (caps-sensitive)");
             }
             else {
                 app.hideAllNotification();
@@ -56,69 +67,16 @@
                     }, function (asyncResult) {
                         if (asyncResult.status == "failed") {
                             app.hideAllNotification();
-                            app.showNotification('Error: ' + asyncResult.error.message);
+                            app.showNotification('Error: ', asyncResult.error.message);
                         }
                     });
                 window.location = "/App/New_Search/Save_Search.html"
+               
             }
         })
     };
 
 
-    /*
-    function gets rows to return. 
-    ~Thea
-    */
-    
-
-
-    /*
-    Function to find the index of an array of serch parameters passed in. In a specific column
-    ~Thea
-    */
-    function findIndex(toFind, col, result) {
-        var foundAt = [];
-        if (result.value != undefined) {
-            for (var i = 0; i < result.value.length; i++) {
-                for (var j = 0; j < toFind.length; j++) {
-                    var currentCheck = result.value[i][col];
-                    if (typeof currentCheck != "string") {
-                        currentCheck = String(currentCheck);
-                    }
-                    // added this for when item contained in comma 
-                    // separated cell with other words/numbers. nigel
-                    if (containsCommas(currentCheck)) {
-                        var array = currentCheck.split(',');
-                        if (containsElementSeparatedByCommas(array, toFind[j])) {
-                            foundAt.push(i);
-                        }
-                    }
-                    else if (toFind[j].toUpperCase().replace(/\s+/g, '') == currentCheck.toUpperCase().replace(/\s+/g, '')) {
-                        foundAt.push(i);
-                    }
-                }
-            }
-        }
-        else {
-            for (var i = 0; i < result.length; i++) {
-                for (var j = 0; j < toFind.length; j++) {
-                    if (toFind[j] == result[i][col]) {
-                        foundAt.push(i);
-                    }
-                }
-            }
-        }
-        return foundAt;
-    }
-
-    /*
-     *  Convert user input target sheet to correct binding range.
-     *  For now this is still going down column A, needs to be linked to bindingArea variable. nigel
-     */
-    function convertInputToValidRange(inputSheet) {
-        var bindingTarget = inputSheet + "!A1:A";
-        return bindingTarget;
-    }
 
     /*
     *   Convert numbers to column letters - nigel
@@ -134,30 +92,6 @@
         return columnName;
     }
 
-    /*   
-     *  Check for element in array. nigel
-     */
-    function containsElementSeparatedByCommas(array, element) {
-        for (var i = 0; i < array.length; i++) {
-            if (array[i].toUpperCase().replace(/\s+/g, '') == element.toUpperCase().replace(/\s+/g, '')) {
-                console.log('true match');
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /*
-     *   Check if a string contains commas. nigel
-     */
-    function containsCommas(string) {
-        for (var i = 0; i < string.length; i++) {
-            if (string[i] == ',') {
-                return true;
-            }
-        }
-        return false;
-    }
 
 
     /*
@@ -180,159 +114,4 @@
         return oneDimArray;
     }
 
-
-    /*
-    *   Delete extra commas from 
-    *   previous empty cells in row. nigel
-    */
-    function deleteArrayCommas(array) {
-        var newArray = [];
-        for (var i = 0; i < array.length; i++) {
-            console.log('array[i] ' + array[i]);
-            if (array[i] != "") {
-                //console.log('array[i][j] ' + array[i]);
-                newArray.push(array[i]);
-            }
-        }
-        console.log('newArray ' + newArray);
-        return newArray;
-    }
-
 })();
-
-
-/*
-(function () {
-    "use strict";
-    // The initialize function must be run each time a new page is loaded
-    Office.initialize = function (reason) {
-        $(document).ready(function () {
-            app.initialize();
-            var toPrint = toString(getResults());
-            $("#return-data").text(toPrint);
-        });
-    };
-
-    /*
-    function gets rows to return. 
-    ~Thea
-    */
-/*
-    function getResults() {
-        var data = JSON.parse(localStorage["userDataSelection"]);
-        var temp = localStorage["currentSearch"];
-        var searchFor = JSON.parse(temp);
-        for (var i = 0; i < searchFor.length; i++) {
-            var column = searchFor[i][0];
-            var toFind = searchFor[i][1];
-            var rowsToGet = findIndex(toFind, column, data);
-            var newData = [];
-            for (var k = 0; k < rowsToGet.length; k++) {
-                if (data.value != undefined) {
-                    for (var j = 0; j < data.value.length; j++) {
-                        if (j == rowsToGet[k]) {
-                            newData.push(data.value[j]);
-                        }
-                    }
-                }
-                else {
-                    for (var j = 0; j < data.length; j++) {
-                        if (j == rowsToGet[k]) {
-                            newData.push(data[j]);
-                        }
-                    }
-                }
-            }
-            data = newData;
-        }
-        //printToWindow(toString(data));
-        return data;
-    }
-
-    /*
-    Function to write out the rows to return in a nice way.
-    ~Thea
-    */
-/*
-    function toString(returnData) {
-        var returnString = "";
-        for (var i = 0; i < returnData.length; i++) {
-            for (var j = 0; j < returnData[i].length; j++) {
-                returnString += (returnData[i][j] + "\t");
-            }
-            returnString += "\n";
-        }
-        return returnString;
-    }
-    
-    /*
-    function to write out return data to a new browser window, takes string version of data.
-    ~Thea
-    */
-/*
-    function printToWindow(data) {
-        var myWindow = window.open("", "MsgWindow", "width=500, height=500");
-        myWindow.document.write("<pre>"+data+"</pre>");
-    }
-
-    /*
-    Function to find the index of an array of serch parameters passed in. In a specific column
-    ~Thea
-    */
-/*
-    function findIndex(toFind, col, result) {
-        var foundAt = [];
-        if (result.value != undefined) {
-            for (var i = 0; i < result.value.length; i++) {
-                for (var j = 0; j < toFind.length; j++) {
-                    var currentCheck = result.value[i][col];
-                    if (typeof currentCheck != "string") {
-                        currentCheck=String(currentCheck);
-                    }
-                    //this returns an error when working with ranges. I'll look into it more when I'm less tired. Dan
-                    if (toFind[j].toUpperCase().replace(/\s+/g, '') == currentCheck.toUpperCase().replace(/\s+/g, '')) {
-                        foundAt.push(i);
-                    }
-                }
-            }
-        }
-        else {
-            for (var i = 0; i < result.length; i++) {
-                for (var j = 0; j < toFind.length; j++) {
-                    if (toFind[j] == result[i][col]) {
-                        foundAt.push(i);
-                    }
-                }
-            }
-        }
-        return foundAt;
-    }
-
-    /*
-    Function that will return a specific row of an array.
-    rowNum = the number of the row you wish to reutrn 
-    result = the array you wish to return the row from
-    ~Thea
-    */
-/*
-    function returnRow(rowNum, result) {
-        return result.value[rowNum];
-    }
-
-    /*
-    Function that will return a set rows of an array.
-    Return type is an array of rows
-    rowNums = the numbers of the rows you wish to reutrn 
-    result = the array you wish to return the row from
-    ~Thea
-    */
-/*
-    function returnRows(rowNums, result) {
-        var rows = [];
-        for (var i = 0; i < rowNums.length; i++) {
-            rows[i] = returnRow[i];
-        }
-        return rows;
-    }
-})();
-*/
