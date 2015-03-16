@@ -20,6 +20,7 @@
     <CspkgPartId>{d7fd3bfd-0076-4389-a994-e7bcfaacc429}</CspkgPartId>
     <SqlPackagePartId>{a54e007d-90ba-4b91-a476-1a59ddc5e14e}</SqlPackagePartId>
     <ProjectMode>OfficeApp</ProjectMode>
+    <ActivePublishProfile>monstr</ActivePublishProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
