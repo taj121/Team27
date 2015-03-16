@@ -106,7 +106,7 @@
                     }
                     else {
                         app.hideAllNotification();
-                        app.showNotification("Export data from original sheet to target sheet successfully", "");
+                        app.showNotification("Data Exported!", "");
                     }
                 });
             }

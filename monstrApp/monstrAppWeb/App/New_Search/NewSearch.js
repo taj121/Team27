@@ -236,7 +236,7 @@
             app.showNotification("Error:", "No Column Selected");
         }
         else if (!(verifyColInput($('#get_col').val()))) {
-            app.showNotification("Error:", "Not a valid column entry");
+            app.showNotification("Error:", "Invalid column");
         } else {
             newColIndex = convertLettersToNumbers(newColIndex);
             if (newColIndex < searchData.value[0].length) {
