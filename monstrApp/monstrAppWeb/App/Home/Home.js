@@ -63,8 +63,17 @@
                         app.hideAllNotification();
                         app.showNotification('Error:', 'Only one row has being selected!');
                     } else {
+
                         app.hideAllNotification();
+                        for (var i = 0; i < result.value.length; i++) {
+                            for (var j = 0; j < result.value[i].length; j++) {
+                                if (result.value[i][j] == "") {
+                                    result.value[i][j] = " "
+                                }
+                            }
+                        }
                         localStorage["userDataSelection"] = JSON.stringify(result);
+                        
                         window.location = url;
                         //json.parse(localstorage["userDataSelection"]); how to get values back DO NOT UNCOMMENT OR DELETE!!!!!
                     }

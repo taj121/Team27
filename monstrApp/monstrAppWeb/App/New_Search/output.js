@@ -18,14 +18,15 @@
             });
         });
     };
+    
+    var sheet;
     var searchResults = JSON.parse(localStorage["data"]);
-    var arraySize = searchResults.length;
-    var bindingArea; // storing in just one column 'A', on 'Sheet2'
-    var letter = convertSizetoLetter(searchResults[0].length);
+    for (var i = 0; i < searchResults.length; i++) {
+        Debug.writeln('[' + searchResults[i] + ']');
+    }
 
-
-    function submitSheet(sheet) {
-        if (arraySize == 0) {
+    function submitSheet(inputSheet) {
+        if (searchResults.length == 0) {
             app.showNotification("Error:", "No entries satisfy the search parameters");
             return false;
         }
@@ -33,7 +34,7 @@
             app.showNotification("Error:", "Please enter a sheet name");
             return false;
         }
-        bindingArea = sheet + "!A1:" + letter + arraySize
+        sheet = inputSheet;
         return true;
     }
 
@@ -54,26 +55,56 @@
     *   'bindingArea' specifies the sheet and range, 'searchResults' the filtered results. - nigel
     */
     function resultsToNewSheet(elementId) {
-        Office.context.document.bindings.addFromNamedItemAsync(bindingArea, Office.BindingType.Matrix, { id: "NewBinding" }, function (asyncResult) {
-            if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                app.showNotification("Error:", "Please make sure you have: 1) Created a new sheet and 2) Entered the right sheet name (caps-sensitive)");
-            }
-            else {
-                app.hideAllNotification();
-                app.showNotification("Success!", "Displaying your search results");
-                Office.select("bindings#NewBinding").setDataAsync(searchResults,
-                    {
-                        coercionType: "matrix"
-                    }, function (asyncResult) {
-                        if (asyncResult.status == "failed") {
-                            app.hideAllNotification();
-                            app.showNotification('Error: ', asyncResult.error.message);
-                        }
-                    });
-                window.location = "/App/New_Search/Save_Search.html"
-               
-            }
-        })
+        var searchResults = JSON.parse(localStorage["data"]);
+        var Idx = 0;
+        var letter;
+        var bindingArea;
+        var data;
+        Debug.writeln("LENGTH: " + searchResults.length);
+
+        for (var i = 0; i < searchResults.length; i++) {
+            Idx++;
+            letter = convertSizetoLetter(searchResults[i].length);
+            bindingArea = sheet + "!A" + Idx + ":" + letter + Idx;
+            data = [searchResults[i]];
+            Debug.writeln(searchResults[i])
+            Debug.writeln("[" + searchResults[i] + "] " + i);
+            outputResult(bindingArea, data);
+
+        }
+
+
+        
+    }
+
+
+    function outputResult(bindingArea, data) {
+
+       var myTable = new Office.TableData();
+
+       myTable.rows = searchResults;
+       
+        var type = myTable.rows.length;
+        var letter = convertSizetoLetter(searchResults[0].length);
+        var namedRange = sheet + "!A1:" + letter + searchResults.length;
+        var id = "Rec" + type;
+        var bnding = "bindings#" + id;
+        Office.context.document.bindings.addFromNamedItemAsync(namedRange, "table", { id: id },
+            function (asyncResult) {
+                if (asyncResult.status == "failed") {
+                    app.showNotification('Error: ' , asyncResult.error.message);
+                }
+            });
+        Office.select(bnding).setDataAsync(myTable, { coercionType: "table" },
+            function (asyncResult) {
+                if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+                    app.showNotification('Error: ' , asyncResult.error.message);
+                } else {
+                    app.showNotification("Success!", "Displaying your data");
+                    window.location = "/App/New_Search/Save_Search.html";
+                }
+            });
+
     };
 
 
