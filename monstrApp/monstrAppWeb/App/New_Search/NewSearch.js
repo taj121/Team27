@@ -180,7 +180,7 @@
     function addNewField() {
 
         if (curTerms.length != 0) {
-            var searchCol = [newColIndex, curTerms]; // [X,[1,2,3]]
+            var searchCol = [newColIndex, curTerms, num_cols]; // [X,[1,2,3],Z]
             currentSearch.push(searchCol);
             localStorage["currentSearch"] = JSON.stringify(currentSearch);
 
@@ -193,9 +193,25 @@
             var $button = $('<button/>', {
                 type: 'button',
                 'class': 'dynBtn',
-                id: str,
+                id: num_cols,
                 text: "Searching Col: " + newColLetter + " for " + str,
-                value: "Searching Col: " + newColLetter + " for " + str,
+                value: num_cols,
+                click: function () {
+                    var idx;
+                    for (var i = 0; i < currentSearch.length; i++) {
+                        Debug.writeln(currentSearch[i][2] + " " + $(this).attr("value"));
+
+                        if (currentSearch[i][2] == $(this).attr("value")) {
+                            idx = i;
+                        }
+                    }
+                    if (idx > -1) {
+                        //terms spliced from current search as they are deleted
+                        currentSearch.splice(idx, 1);
+                    }
+                    app.showNotification("Item removed from search");
+                    $(this).remove();
+                }
             });
             $button.appendTo('#all_terms');
             $('#all_terms').show();
@@ -203,7 +219,9 @@
             $('#get_col').val('');
             $('#word_num_menu').hide();
             $('#end_btns').hide();
-            $("#final_btns").show();
+            $('#final_btns').show();
+            $('#add_another').show();
+            $('#submit_input').show();
             $("#show_col").hide();
             $('#add_another').removeAttr('disabled');
             $('#get_col').focus();
@@ -221,7 +239,8 @@
         $('#show_col').contents().remove();
         $("#get_col").show();
         $("#col_submit").show();
-        $('#add_another').attr('disabled', 'disabled');
+        $('#add_another').hide();
+        $('#submit_input').hide();
 
     }
 
@@ -302,7 +321,7 @@
                     value: term,
                     click: function () {
                         app.hideAllNotification();
-                        app.showNotification("Removed the following term from search:'" , $(this).attr("value") );
+                        app.showNotification("Removed the following term from search:" , $(this).attr("value") );
 
                         var index = curTerms.indexOf($(this).attr("value"));
                         if (index > -1) {
@@ -327,60 +346,6 @@
         }
     }
 
-    function addRange(rbegin, rend) {
-        var rangeContainer = [rbegin, rend] //to hold lo/hi of range
-        if (colAdded == 1) {
-            if (rbegin != "" && rend != "") {
-                if (rbegin != -1 && rend != -1) {
-                    if (rbegin <= rend) {
-                        //terms pushed to current search as they are entered
-                        var str = ""
-                        for (var i = rbegin; i <= rend; i++) {
-                            str += i + ", "
-                        }
-                        curTerms.push(rangeContainer);
-                        //i envision this as 1)check if entry is a list 2)if so do an or with the elements in that list
-                        var $button = $('<button/>', {
-                            type: 'button',
-                            'class': 'dynBtn',
-                            id: rbegin + "-" + rend,
-                            text: "range: " + rbegin + "-" + rend,
-                            value: "range: " + rbegin + "-" + rend,
-                            click: function () {
-                                app.hideAllNotification();
-                                app.showNotification("Removed the following term from search:'", $(this).attr("value"));
-
-                                for (var i = rbegin; i <= rend; i++) {
-                                    var index = curTerms.indexOf(i);
-                                    if (index > -1) {
-                                        //terms spliced from current search as they are deleted
-                                        curTerms.splice(index, 1);
-                                    } 
-                                }
-                                $(this).remove();
-                                
-
-                            }
-                        });
-                        $button.appendTo('#all_terms');
-                        $('#range_begin').val("");
-                        $('#range_end').val("");
-                    } else {
-                        app.hideAllNotification();
-                        app.showNotification("Error:", "The beginning of the range must be a lower value than the end of the range.")
-                    }
-                }
-                else {
-                    app.hideAllNotification();
-                    app.showNotification("Error:", "You must enter a value to search for!");
-                }
-            } else {
-                app.hideAllNotification();
-                app.showNotification("Error:","You must submit a column before entering search values");
-            }
-        }
-        app.showNotification("Searching for: " + str);
-    }
 
     function checkEntry() {
         if (curTerms.length > 0) {
@@ -437,52 +402,8 @@
         return valueToReturn - 1;
     }
 
-    /*
-    Adds a new column to search in to the array of current search. 
-    Defaults with nothing to search for. 
-    ~Thea
-    */
-    function addNewColumn() {
-        var newColIndex = convertLettersToNumbers($('#get-col').val());
-        currentSearch.push([newColIndex]);
-    }
 
-    /*
-    Fucntion to add new search parameters to the most recent column added to the current search
-    ~Thea
-    */
-    function addNewParam() {
-        var column = currentSearch.pop();
-        var param = $('#get-param').val();
-        column.push(param);
-        currentSearch.push(column);
-    }
-
-    /*Function to convert currentSearch[] to a String, for printing search details
-    -Mark
-    */
-    function searchToString() {
-        var details;
-        for (var i = 0; i < currentSearch.length; i++) {
-            details += "-Search in column " + currentSearch[i][0] + "for:\n  -"
-            for (var j = 1; j < currentSearch[i].length; i++) {
-
-                if (currentSearch[i].length == 1) {
-                    details += currentSearch[i][j] + ". \n \n"
-                }
-                else{
-                    if (j == currentSearch[i].length) {
-                        details += "and" + currentSearch[i][j] + ". \n \n"
-                    }
-                    else {
-                        details += currentSearch[i][j] + ", ";
-                    }
-                }
-
-            }
-            return details;
-        }
-    }
+    
 
     /*
     function to save a search, must be passed a name given by the user.
@@ -534,4 +455,4 @@
         }
     }
 
-    })();
+})();

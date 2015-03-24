@@ -8,12 +8,10 @@
             $('#select_column').click(function () {
                 selectColumn();
             });
-            $('#results-to-new-sheet').click(function () {
-                resultsToNewSheet();
-            });
+            
             $('#output_sheet_submit').click(function () {
                 if (submitSheet($('#output_sheet_value').val())) {
-                    resultsToNewSheet();
+                    outputResult();
                 }
             });
         });
@@ -21,9 +19,7 @@
     
     var sheet;
     var searchResults = JSON.parse(localStorage["data"]);
-    for (var i = 0; i < searchResults.length; i++) {
-        Debug.writeln('[' + searchResults[i] + ']');
-    }
+    
 
     function submitSheet(inputSheet) {
         if (searchResults.length == 0) {
@@ -54,31 +50,10 @@
     *   Creates a binding with the search results and binding range passed. 
     *   'bindingArea' specifies the sheet and range, 'searchResults' the filtered results. - nigel
     */
-    function resultsToNewSheet(elementId) {
-        var searchResults = JSON.parse(localStorage["data"]);
-        var Idx = 0;
-        var letter;
-        var bindingArea;
-        var data;
-        Debug.writeln("LENGTH: " + searchResults.length);
-
-        for (var i = 0; i < searchResults.length; i++) {
-            Idx++;
-            letter = convertSizetoLetter(searchResults[i].length);
-            bindingArea = sheet + "!A" + Idx + ":" + letter + Idx;
-            data = [searchResults[i]];
-            Debug.writeln(searchResults[i])
-            Debug.writeln("[" + searchResults[i] + "] " + i);
-            outputResult(bindingArea, data);
-
-        }
+    
 
 
-        
-    }
-
-
-    function outputResult(bindingArea, data) {
+    function outputResult() {
 
        var myTable = new Office.TableData();
 
@@ -109,40 +84,7 @@
 
 
 
-    /*
-    *   Convert numbers to column letters - nigel
-    */
-    function convertNumberToLetter(number) {
-        var asciiCodeA = 65; // capital A
-        var asciiCodeZ = 90;
-        var alphabetLength = 26;
-        var columnName = "";
-        for (number; number >= 0; number = Math.floor(number / alphabetLength) - 1) {
-            columnName += String.fromCharCode(number % alphabetLength + asciiCodeA);
-        }
-        return columnName;
-    }
+  
 
-
-
-    /*
-    *   Converts 1d to 2d
-    */
-    function convertOneDimToTwoDim(array) {
-        var twoDimArray = [];
-        while (array.length) {
-            twoDimArray.push(array.splice(0, 1));
-        }
-        return twoDimArray;
-    }
-
-    /*
-    *   convert 2d array to 1d. nigel
-    */
-    function convertTwoDimToOneDim(array) {
-        var oneDimArray = [];
-        oneDimArray = oneDimArray.concat.apply(oneDimArray, array);
-        return oneDimArray;
-    }
 
 })();

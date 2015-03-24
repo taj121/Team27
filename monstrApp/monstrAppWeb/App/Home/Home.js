@@ -27,10 +27,6 @@
     }
 
 
-    function getText() {
-        return $('#get').val();
-    }
-
     /*
     Updates global variable to user selection when called and loads new search page if data selected correctly
     ~Thea
@@ -85,70 +81,28 @@
         );
     }
 
-    /*
-    gets text from input box with this id
-    ~Thea
-    */
-    function getText() {
-        return $('#get').val();
-    }
-
-
-    /*
-    *     Function to write data from one excel sheet to another
-    *     The idea is to make the returned result from the search 
-    *     the "originalData" parameter, and then write this to the new excel sheet.. 
-    *     Needs frontend and testing.. nigel
-    */
-    function writeDataToNewSheet(targetRange, originalData) {
-        // Add binding
-        Office.context.document.bindings.addFromNamedItemAsync($(targetRange).val(), Office.BindingType.Matrix, { id: "exportedBinding" }, function (asyncResult) {
-            if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                writeMessage("Error: " + asyncResult.error.message);
+    function getNamesSaved() {
+        var names = Office.context.document.settings.get('search_names');
+        if (names || names === "") {
+            names = JSON.parse(names);
+            var select = document.getElementById('saved_searches');
+            for (var i = 0; i < names.length; i++) {
+                var opt = document.createElement('option');
+                opt.innerHTML = names[i];
+                opt.value = names[i];
+                select.appendChild(opt);
             }
-            else {
-                // Write data in original to the binding in new 
-                Office.select("bindings#exportedBinding").setDataAsync(originalData, { coercionType: "matrix" }, function (asyncResult) {
-                    if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                        app.hideAllNotification();
-                        app.showNotification("Error: " , asyncResult.error.message);
-                    }
-                    else {
-                        app.hideAllNotification();
-                        app.showNotification("Data Exported!", "");
-                    }
-                });
-            }
-        });
+
+        }
+        else {
+            app.showNotification("Error:", "You must save a search before you can use this menu")
+        }
     }
 
-    // Function to specify a range, needs to be modified
-    function selectRange() {
-        Office.context.document.bindings.addFromPromptAsync(Office.BindingType.Matrix,
-            { id: "MatrixBinding" },
-            function (asyncResult) {
-                if (Office.AsyncResultStatus.Succeeded) {
-                    app.hideAllNotification();
-                    app.showNotification("Added range: " + asyncResult.value.type
-                        + " and id: " + asyncResult.value.id, "");
-                } else {
-                    app.hideAllNotification();
-                    app.showNotification('Error:', asyncResult.error.message);
-                }
-            }
-        );
-    }
 
-    function test() {
-        app.hideAllNotification();
-        app.showNotification("Added '" + $('#data_input').val() + "' to search", "");
-        var newLabel = document.createElement("label");
-        newLabel.innerHTML = $('#data_input').val();
-        document.body.appendChild(newLabel);
 
-        document.getElementById('data_input').value = "";
 
-    }
+    
     //check if saved searches
     //~Thea
     function checkIfSavedSearches() {
