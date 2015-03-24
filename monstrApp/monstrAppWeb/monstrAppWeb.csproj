@@ -90,7 +90,10 @@
     <Content Include="Content\Office.css" />
     <Content Include="Images\Close.png" />
     <Content Include="App\Tutorial\Help_Images\newSheet.png" />
+    <Content Include="Images\home.png" />
+    <Content Include="Images\logo.png" />
     <Content Include="Images\redx.jpg" />
+    <Content Include="Images\x.png" />
     <Content Include="packages.config" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
