@@ -58,6 +58,9 @@
         var temp = localStorage["currentSearch"];
         var searchFor = JSON.parse(temp);
         var newData = [];
+        Debug.writeln(searchFor);
+        Debug.writeln(data.value);
+
 
         for (var i = 0; i < searchFor.length; i++) {
             var column = searchFor[i][0];
@@ -222,6 +225,7 @@
             $('#final_btns').show();
             $('#add_another').show();
             $('#submit_input').show();
+            $('#submit_input').removeAttr('disabled');
             $("#show_col").hide();
             $('#add_another').removeAttr('disabled');
             $('#get_col').focus();
@@ -241,6 +245,7 @@
         $("#col_submit").show();
         $('#add_another').hide();
         $('#submit_input').hide();
+        $('#submit_input').attr("disabled", true);
 
     }
 
