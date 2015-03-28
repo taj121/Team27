@@ -114,7 +114,7 @@
         if (names || names === "") {
         }
         else {
-            //$("#saved-search").attr("disabled", true);
+            $("#saved-search").attr("disabled", true);
             $("#saved-search").attr("hidden",true)
         }
     }

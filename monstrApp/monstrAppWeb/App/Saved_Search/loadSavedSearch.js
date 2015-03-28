@@ -49,18 +49,19 @@
 
     function getResults() {
         var data = JSON.parse(localStorage["userDataSelection"]);
-        console.log('data getResults() ' + data);
+        //console.log('data getResults() ' + data);
         var temp = localStorage["currentSearch"];
         var searchFor = JSON.parse(temp);
         var newData = [];
 
         for (var i = 0; i < searchFor.length; i++) {
+            var newData = [];
             var column = searchFor[i][0];
             var toFind = searchFor[i][1];
-            console.log('toFind ' + toFind);
+            //console.log('toFind ' + toFind);
             var rowsToGet = findIndex(toFind, column, data);
             for (var k = 0; k < rowsToGet.length; k++) {
-                console.log('data.value before ' + data.value);
+                //console.log('data.value before ' + data.value);
                 if (data.value != undefined) {
                     for (var j = 0; j < data.value.length; j++) {
                         if (j == rowsToGet[k]) {

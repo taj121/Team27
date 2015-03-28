@@ -438,24 +438,25 @@
             Office.context.document.settings.set(searchName, JSON.stringify(currentSearch));
             Office.context.document.settings.saveAsync(function (asyncResult) {
                 if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                    app.showNotification('Settings save failed. Error: ' + asyncResult.error.message);
+                    app.showNotification('Search save failed. Error: ' + asyncResult.error.message);
                 } else {
-                    app.showNotification('Settings saved.');
-                }
-            });
-            names.push(searchName);
-            //save name of search in array of names of search
-            var temp = JSON.stringify(names);
-            Office.context.document.settings.set('search_names', JSON.stringify(names));
-            Office.context.document.settings.saveAsync(function (asyncResult) {
-                if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                    app.showNotification('Settings save failed. Error: ' + asyncResult.error.message);
-                } else {
-                    app.showNotification('Settings saved.');
+                    //app.showNotification('Settings saved.');
+                    names.push(searchName);
+                    //save name of search in array of names of search
+                    var temp = JSON.stringify(names);
+                    Office.context.document.settings.set('search_names', JSON.stringify(names));
+                    Office.context.document.settings.saveAsync(function (asyncResult) {
+                        if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+                            app.showNotification('Settings save failed. Error: ' + asyncResult.error.message);
+                        } else {
+                            app.showNotification('Settings saved.');
 
-                    window.location = "/App/Home/Home.html";
+                            window.location = "/App/Home/Home.html";
+                        }
+                    });
                 }
             });
+            
         }
     }
 
