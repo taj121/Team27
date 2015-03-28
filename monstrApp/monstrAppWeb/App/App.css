@@ -91,3 +91,9 @@ input[type=text] {
 .dynBtn{
 
 }
+
+.homeButton {
+    position:fixed;
+    top:50%;
+    left:35%;
+}
