@@ -53,11 +53,15 @@
             {   
                 valueFormat: Office.ValueFormat.Formatted,
             },
+
             function (result) {
                 if (result.status === Office.AsyncResultStatus.Succeeded) {
                     if (result.value.length == 1) {
                         app.hideAllNotification();
                         app.showNotification('Error:', 'Only one row has being selected!');
+                    } else if (result.value.length * result.value[0].length > 50000) {
+                        app.hideAllNotification();
+                        app.showNotification('Error:', 'Input size cannot be larger than 50,000 cells!');
                     } else {
 
                         app.hideAllNotification();
