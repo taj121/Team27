@@ -184,7 +184,7 @@
             }
 
         }
-        Debug.writeln(details);
+        //Debug.writeln(details);
         return details;
     }
 
