@@ -6,10 +6,15 @@
         $(document).ready(function () {
             app.initialize();
             getNamesSaved();
+
+            $('#view_selected').click(function () {
+                loadSelectedSearch();
+                searchToString();
+            })
+
             $('#run_selected').click(function () {
                 loadSelectedSearch();
                 getResults();
-              //  searchToString();
             });
         });
     };
@@ -177,15 +182,15 @@
         var curr = localStorage["currentSearch"];
         var currentSearch = JSON.parse(curr);
         for (var i = 0; i < currentSearch.length; i++) {
-            details += "-Search in column " + currentSearch[i][0] + " for:\n  -"
-            for (var j = 0; j = currentSearch[i][1].length; j++) {
-                details += "   " + (j + 1) + ") " + currentSearch[i][1][j] + "\n";
+            details += "\n-Search in column " + currentSearch[i][0] + " for:\n"
+            for (var j = 0; j < currentSearch[i][1].length; j++) {
+                details += "  -" + currentSearch[i][1][j] + "\n";
 
             }
 
         }
-        //Debug.writeln(details);
-        return details;
+        app.showNotification(details);
+        Debug.writeln(details);
     }
 
 })();
