@@ -43,7 +43,7 @@ h1 {
         <div id="col_area">
             <h4>Which column would you like to search?</h4>
             <p>(Enter the letter of the column)</p>
-            <input type="text" size="2" id="get_col" onkeydown="if (event.keyCode == 13) {document.getElementById('col_submit').click()}" /> <input type="submit" value="Submit" id="col_submit" />
+            <input type="text" size="2" id="get_col" onkeydown="if (event.keyCode == 13) {document.getElementById('col_submit').click()}" /> <input type="submit" value="Ok" id="col_submit" />
             <br/>
         </div>
 
@@ -57,7 +57,7 @@ h1 {
                 <label for="cmn-toggle-1"></label>
             </div>-->
             <br />
-            <input type="text" id="single_input" onkeydown="if (event.keyCode == 13) { if (this.value != '') { document.getElementById('OK_single_input').click() } }" /> <input type="submit" value="OK" id="OK_single_input" />
+            <input type="text" id="single_input" onkeydown="if (event.keyCode == 13) { if (this.value != '') { document.getElementById('OK_single_input').click() } }" /> <input type="submit" value="Add" id="OK_single_input" />
             <div id="show_col"></div>
             <br />
         </div>
@@ -66,7 +66,7 @@ h1 {
         <div id="end_btns" style="display:none">
             <br />
             <br />
-            <input type="submit" value="Add to Search" id="run_again"/>
+            <input type="submit" value="Add These Conditions to Search" id="run_again"/>
         </div>
 
         <div id="all_terms" style="display:none">
