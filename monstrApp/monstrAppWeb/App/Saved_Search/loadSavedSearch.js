@@ -190,7 +190,6 @@
 
         }
         app.showNotification(details);
-        Debug.writeln(details);
     }
 
 })();
