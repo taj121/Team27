@@ -9,7 +9,9 @@
 
             $('#view_selected').click(function () {
                 loadSelectedSearch();
-                searchToString();
+                var toPrint = searchToString();
+                $("#return_search_view").text(toPrint);
+
             })
 
             $('#run_selected').click(function () {
@@ -189,7 +191,9 @@
             }
 
         }
-        app.showNotification(details);
+        //app.showNotification(details);
+        $('#view').show();
+        return details;
     }
 
 })();
