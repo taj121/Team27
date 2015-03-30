@@ -26,7 +26,15 @@
             app.showNotification("Error:", "No entries satisfy the search parameters");
             return false;
         }
-        else if (sheet == "" || sheet == "New spreadsheet name" || sheet==null) {
+        else if (inputSheet.indexOf(" ") != -1) {
+            app.showNotification("Error:", "The name of the new sheet cannot contain spaces.");
+            return false;  
+        }
+        //else if (sheet == "" || sheet == null) {
+        //    app.showNotification("Error:", "Please enter the exact sheet name, eg 'Sheet2'");
+        //    return false;
+        //}
+        else if (inputSheet == "" || inputSheet == null) {
             app.showNotification("Error:", "Please enter the exact sheet name, eg 'Sheet2'");
             return false;
         }
