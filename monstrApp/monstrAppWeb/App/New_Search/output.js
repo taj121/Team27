@@ -26,8 +26,8 @@
             app.showNotification("Error:", "No entries satisfy the search parameters");
             return false;
         }
-        else if (sheet == "" || sheet == "New spreadsheet name") {
-            app.showNotification("Error:", "Please enter a sheet name");
+        else if (sheet == "" || sheet == "New spreadsheet name" || sheet==null) {
+            app.showNotification("Error:", "Please enter the exact sheet name, eg 'Sheet2'");
             return false;
         }
         sheet = inputSheet;

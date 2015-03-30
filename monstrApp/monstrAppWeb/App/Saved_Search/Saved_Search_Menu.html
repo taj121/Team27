@@ -38,6 +38,7 @@
         </form>-->
         <select id="saved_searches"></select>
         <br />
+        <input type="submit" value="View Search Details" id="view_selected" />
         <input type="submit" value="Run Search" id="run_selected" />
 
 
@@ -45,7 +46,11 @@
             <input type="submit" value="Back" />
         </form>
     </div>
-  
+
+    <div id="view" style="display:none">
+        <h5>Search details:</h5>
+        <p id="return_search_view"></p>
+    </div>
 
 
 </body>
