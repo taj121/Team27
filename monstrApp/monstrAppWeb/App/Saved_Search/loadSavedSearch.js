@@ -9,8 +9,7 @@
 
             $('#view_selected').click(function () {
                 loadSelectedSearch();
-                var toPrint = searchToString();
-                $("#return_search_view").text(toPrint);
+                searchToString();
 
             })
 
@@ -179,21 +178,48 @@
         }
         return false;
     }
+    //Mark
     function searchToString() {
+        $('#view').contents().remove();
         var details = "";
         var curr = localStorage["currentSearch"];
         var currentSearch = JSON.parse(curr);
         for (var i = 0; i < currentSearch.length; i++) {
-            details += "\n-Search in column " + currentSearch[i][0] + " for:\n"
+            var details = "\t";
+            details += "-Search in column " + convertNumbersToLetters(currentSearch[i][0]) + " for:";
+            details += "\n";
             for (var j = 0; j < currentSearch[i][1].length; j++) {
-                details += "  -" + currentSearch[i][1][j] + "\n";
+                if (j < currentSearch[i][1].length - 1)
+                    details += "  " + currentSearch[i][1][j] + ",";
+                else
+                    details += "  " + currentSearch[i][1][j] + ".";
 
             }
+            var $button = $('<button/>', {
+                type: 'button',
+                id: i,
+                text: details,
+            });
+            $button.appendTo("#view");
 
         }
-        //app.showNotification(details);
-        $('#view').show();
-        return details;
+
+        $('#view').show()
+
+
+
     }
+    //Mark
+    function convertNumbersToLetters(inputNumber) {
+        var valueToReturn = 0;
+        var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        if (inputNumber >= alphabet.length) {
+            return inputNumber;
+        }
+        return alphabet[inputNumber];
+    }
+
+
 
 })();
